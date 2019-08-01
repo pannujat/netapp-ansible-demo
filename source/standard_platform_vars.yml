@@ -1,0 +1,64 @@
+cluster:
+
+netapp_hostname:
+netapp_username:
+#netapp_password:
+
+license_codes:
+
+# cluster_config role
+
+#disks:	# at 2.7 the disks module assigns all visiable disks to a node.
+#  - "{{ cluster }}-01"
+
+#motd: "{{ motd_mess }}"
+
+dns:	# Set DNS for Cluster
+  - { dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
+
+ntp:	# Set NTP Server (requires the cluster to have DNS set)
+  - { server_name: "{{ ntp_srvr }}", version: auto }
+
+snmp:	# Setup or modify an SNMP community
+  - { community_name: public, access_control: ro }
+
+aggrs:	# Create one or more Aggregates.
+  - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+
+ports:  # Set MTU for ports.
+  - { node: "{{ cluster }}-01", port: e0a, mtu: 1500 }
+  - { node: "{{ cluster }}-01", port: e0b, mtu: 1500 }
+#  - { node: "{{ cluster }}-01", port: e0c, mtu: 1500 }
+  - { node: "{{ cluster }}-01", port: e0d, mtu: 1500 }
+  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500 }
+  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500 }
+
+ifgrps:  # Create and add ports to Interface Groups.
+  - { name: a0a, node: "{{ cluster }}-01", ports: "e0e,e0f", mode: multimode_lacp, mtu: 1500 }
+
+vlans:  # Create vlans on LIFS
+  - { id: 201, node: "{{ cluster }}-01", port: a0a }
+
+bcasts:  # Create Broadcast domains
+#  - { name: Cluster, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0a,{{ cluster }}-01:e0b' }
+  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:a0a,{{ cluster }}-01:a0a-201' }
+  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
+
+inters:  # Create intercluster lifs for SnapMirror.
+  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+
+# # #
+# vserver_create role
+# # #
+
+vservers:  # Vservers to create
+  - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
+
+vserver_dns:  # DNS at the Vserver level.
+  - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ vdns_servers }}" }
+
+lifs:  # interfaces for the Vservers being created
+  - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
+
+gateway: # To configure the default route/gateway for the vservers
+  - { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }
