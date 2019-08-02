@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  gather_facts: no
+  name: Create Cluster playbook
+  vars:
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+    - dest96_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
+  tasks:
+
+# ROLE: na_ontap_config_cluster
+
+  - name: Get Ontapi version
+    na_ontap_gather_facts:
+      state: info
+      <<: *login
+
+  - name: Create cluster
+    na_ontap_cluster:
+      state: present
+      cluster_name: "{{ cluster }}"
+      <<: *login

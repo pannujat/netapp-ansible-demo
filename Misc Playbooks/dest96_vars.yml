@@ -1,0 +1,4 @@
+cluster: dest96
+
+netapp_hostname: 172.30.16.216
+netapp_username: admin
