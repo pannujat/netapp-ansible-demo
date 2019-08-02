@@ -1,6 +1,6 @@
-cluster: source95
+cluster: dest96
 
-netapp_hostname: 172.30.16.210
+netapp_hostname: 172.30.16.215
 netapp_username: admin
 # Leave commented out for vars_promtp to work
 #netapp_password:

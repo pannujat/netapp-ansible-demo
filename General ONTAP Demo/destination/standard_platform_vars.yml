@@ -13,10 +13,10 @@ license_codes:
 
 # cluster_config role
 
-#disks:	# at 2.7 the disks module assigns all visiable disks to a node.
-#  - "{{ cluster }}-01"
+disks:	# at 2.7 the disks module assigns all visiable disks to a node.
+  - "{{ cluster }}-01"
 
-motd: "{{ motd_mess }}"
+#motd: "{{ motd_mess }}"
 
 dns:	# Set DNS for Cluster
   - { dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
