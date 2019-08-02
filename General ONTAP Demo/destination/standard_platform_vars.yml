@@ -60,7 +60,7 @@ vservers:  # Vservers to create
 
 # vserver_dns can't communicate off local subnet due to a race condition
 vserver_dns:  # DNS at the Vserver level.
-  - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ vdns_servers }}" }
+  - { vserver: "{{ svm }}", dns_domains: "{{ vdns_domain }}", dns_nameservers: "{{ vdns_servers }}" }
 
 lifs:  # interfaces for the Vservers being created
   - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}{{ nodename }}01a", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }

@@ -26,19 +26,22 @@ svm: destination
 #svm_aggregate: aggr1
 svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
 svm_aggr_list:
-svm_port: a0a
+svm_port: e0c
 svm_address: 172.30.16.218
 svm_netmask: 255.255.0.0
 svm_gateway: 172.30.16.2
+
+vdns_domain: "{{ dns_domain }}"
+vdns_servers: "{{ dns_servers }}"
 
 svm_root_vol_security: unix
 svm_export_policy_name: data
 
 # Export-Policy Management
-export_policy_rules:
-   - { name: 'default', client_match: '172.30.16.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
-   - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
-   - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
+export_policy_rules_list:
+  - { name: 'default', client_match: '172.30.16.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
+  - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+  - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
 
 # ansible-vault testing varibles
 
@@ -65,8 +68,7 @@ motd_mess: |
 # DNS Settings - Set to overide Standard config
 dns_domain: example.local
 dns_servers: "172.30.16.2,8.8.8.8"
-#vdns_servers: "172.30.16.2,8.8.8.8"
-vdns_servers: 172.30.16.2
+
 
 # NTP Server
 ntp_srvr: time.nist.gov
