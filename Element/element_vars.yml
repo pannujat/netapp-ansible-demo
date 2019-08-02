@@ -1,0 +1,20 @@
+# Ansible Varible file for
+# Element Volume provisioning workflow to a Linux Client
+
+elementsw_hostname: 172.30.16.220
+elementsw_username: admin
+#elementsw_password:
+
+state: present
+
+vol_element_username: Ansible
+vol_element_username_id: 1
+
+vol_name: AnsibleVol
+vol_qos: '{minIOPS: 1000, maxIOPS: 20000, burstIOPS: 50000}'
+vol_account_id: Ansible
+vol_enable512e: False
+vol_size: 2
+vol_size_unit: gb
+
+vag_name: AnsibleVAG

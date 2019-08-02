@@ -1,0 +1,96 @@
+cluster: source95
+
+netapp_hostname: 172.30.16.210
+netapp_username: admin
+# Leave commented out for vars_promtp to work
+#netapp_password:
+
+# System Specific Varibles
+
+###
+# Cluster Standard Configuration Varibles (see below)
+###
+
+# cluster_mgmt and node_mgmt LIFs will normally be configured during install
+# broadcast-domain split on the "MGMT" interfaces to push them from default to MGMT
+
+
+###
+# SVM Standard Configuration Varibles
+###
+
+# SVM Varibles
+svm: source
+svm_aggregate: aggr1
+svm_aggr_list:
+svm_port: e0c
+svm_address: 172.30.16.213
+svm_netmask: 255.255.0.0
+svm_gateway: 172.30.16.2
+
+svm_root_vol_security: unix
+svm_export_policy_name: data
+
+# ansible-vault testing varibles
+
+svm_volume_name: svm_test
+secret_vol: secret_vol
+size: 1
+units: gb
+vol_type: dp
+
+license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA,SOHOURRRYVHXCFABGAAAAAAAAAAA,KQSRRRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,GUJZTRRRYVHXCFABGAAAAAAAAAAA,OSYVWRRRYVHXCFABGAAAAAAAAAAA,UZLKTRRRYVHXCFABGAAAAAAAAAAA,EJFDVRRRYVHXCFABGAAAAAAAAAAA
+
+state: present
+
+
+
+# Role varibles
+
+motd_mess: |
+  ****************************************************************************
+  *
+  * Welcome \N, today is \d.
+  * You are currently logged into Node/SVM; \n.
+  * On cluster \C, running \s \r.  Your last login was \L.
+  *
+  ****************************************************************************
+
+# DNS Settings - Set to overide Standard config
+dns_domain: example.local
+dns_servers: "172.30.16.2,8.8.8.8"
+vdns_servers: "172.30.16.2,8.8.8.8"
+
+# NTP Server
+ntp_srvr: time.nist.gov
+
+# Networking Varibles
+ifgrp_ports: "e0e,e0f"
+vlan_id: 201
+
+# Standard Configuration varibles
+
+# Configure the service processors.
+service_processor:
+    - { node: 'newclu01n01a', ip: '10.253.168.110', gw: '10.253.168.1', mask: '255.255.255.0' }
+    - { node: 'newclu01n01b', ip: '10.253.168.112', gw: '10.253.168.1', mask: '255.255.255.0' }
+
+###
+# Renaming section
+###
+
+# Rename node section - Ex: cluster-01 to clusterh01a
+nodename: h
+node_names:
+  - { name: "{{ cluster }}-01", rename: "{{ cluster }}{{ nodename }}01a" }
+  - { name: "{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b" }
+  - { name: "{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a" }
+  - { name: "{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b" }
+
+# Rename root aggregate section
+aggr_list:
+  - { name: 'aggr0_source95_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+
+# Rename root volume section
+vol0_list:
+  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root" }

@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: no
-  name: Source Cluster Config
+  name: Destination Cluster Config
   vars:
     input: &login
       hostname: "{{ netapp_hostname }}"
@@ -33,34 +33,6 @@
       <<: *login
 
 # Standard Cluster configuration section
-
-# Configure the service processors.
-#  - name: Modify Service Processor Network
-#    na_ontap_service_processor_network:
-#      state: present
-#      address_type: ipv4
-#      is_enabled: true
-#      dhcp: none
-#      node: "{{ item.node }}"
-#      ip_address: "{{ item.ip }}"
-#      gateway_ip_address: "{{ item.gw }}"
-#      netmask: "{{ item.mask }}"
-#      <<: *login
-#    with_list: "{{ service_processor }}"
-
-  # Configure Autosupport
-  # Configure standard settings
-  # Need to device a list to run this through for mulitple systems
-#  - name: Enable autosupport
-#    na_ontap_autosupport:
-#      state: present
-#      node_name: "{{ cluster }}-01"
-#      transport: "{{ asup_transport }}"
-#      noteto: "{{ asup_noteto }}"
-#      mail_hosts: "{{ asup_mailhosts }}"
-#      to_addresses: "{{ asup_to_addresses }}"
-#      support: true
-#      <<: *login
 
   # Standardize naming and set common root aggr/vol settings
 #  - name: rename node

@@ -1,0 +1,55 @@
+---
+- hosts: localhost
+  gather_facts: no
+  name: ELement Volume Config (not role-based)
+  vars:
+     login: &login
+       hostname: "{{ elementsw_hostname }}"
+       username: "{{ elementsw_username }}"
+       password: "{{ elementsw_password }}"
+#       https: true
+#       validate_certs: false
+  vars_files:
+    - element_vars.yml
+  vars_prompt:
+    - name: "elementsw_password"
+      prompt: "Enter Element Admin Password"
+      private: yes
+  tasks:
+
+# Element Volume Configuration
+
+# Create Volume Account
+
+  - name: Create Account
+    na_elementsw_account:
+      <<: *login
+      state: "{{ state }}"
+      element_username: "{{ vol_element_username }}"
+
+# Create Volume
+
+  - name: Create Volume
+    na_elementsw_volume:
+      <<: *login
+      state: "{{ state }}"
+      name: "{{ vol_name }}"
+      qos: "{{ vol_qos }}"
+      account_id: "{{ vol_account_id }}"
+      enable512e: "{{ vol_enable512e }}"
+      size: "{{ vol_size }}"
+      size_unit: "{{ vol_size_unit }}"
+
+# Create Access Group
+
+  - name: Create Access Group
+    na_elementsw_access_group:
+      <<: *login
+      state: "{{ state }}"
+      name: "{{ vag_name }}"
+      volumes: "{{ vol_name }}"
+      account_id: "{{ vol_element_username_id }}"
+
+# Add initiator to Access Group
+
+# Mount LUN on Linux Client

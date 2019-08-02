@@ -1,0 +1,145 @@
+cluster:
+
+netapp_hostname:
+netapp_username:
+# Leave commented out for vars_promtp to work
+#netapp_password:
+
+license_codes:
+
+###
+# Role Configuration varibles
+###
+
+# cluster_config role
+
+#disks:	# at 2.7 the disks module assigns all visiable disks to a node.
+#  - "{{ cluster }}-01"
+
+motd: "{{ motd_mess }}"
+
+dns:	# Set DNS for Cluster
+  - { dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
+
+ntp:	# Set NTP Server (requires the cluster to have DNS set)
+  - { server_name: "{{ ntp_srvr }}", version: auto }
+
+snmp:	# Setup or modify an SNMP community
+  - { community_name: public, access_control: ro }
+
+aggrs:	# Create one or more Aggregates.
+  - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+
+ports:  # Set MTU for ports.
+  - { node: "{{ cluster }}-01", port: e0a, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0b, mtu: 1500, flowcontrol: none }
+#  - { node: "{{ cluster }}-01", port: e0c, mtu: 1500 } vsim MGMT LIF
+  - { node: "{{ cluster }}-01", port: e0d, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
+
+ifgrps:  # Create and add ports to Interface Groups.
+  - { name: a0a, node: "{{ cluster }}-01", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
+
+vlans:  # Create vlans on LIFS
+  - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", port: a0a }
+
+bcasts:  # Create Broadcast domains
+  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:a0a,{{ cluster }}-01:a0a-201' }
+  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
+
+inters:  # Create intercluster lifs for SnapMirror.
+  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+
+###
+# vserver_create role
+###
+
+vservers:  # Vservers to create
+  - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
+
+vserver_dns:  # DNS at the Vserver level.
+  - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ vdns_servers }}" }
+
+lifs:  # interfaces for the Vservers being created
+  - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
+
+gateway: # To configure the default route/gateway for the vservers
+  - { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }
+
+###
+# Standard Configuration Section varibles
+###
+
+#timezone Setting:
+timezone_var: UTC
+
+#timezone command:
+timezone: "set -privilege diagnostic -confirmation off;timezone -timezone {{ timezone_var }}"
+
+# Autosupport Configuration Varibles
+# asup_nodename: *
+asup_transport: smtp
+asup_noteto: admin@example.com
+asup_mailhosts: 172.30.16.125
+asup_to_addresses: netapp_admin@example.com
+
+# Autosupport - Set FROM: fields
+asup_from: "system node autosupport modify -node * -from vsim@example.local"
+
+# Invoke Autosupport
+asup_invoke: "system node autosupport invoke -node * -type all"
+
+# Enable discovery tools
+cdp: "run -node * options cdpd.enable on"
+lldp: "run -node * options lldp.enable on"
+
+###
+# LDAP
+###
+
+###
+# SVM LDAP Configuration Varibles
+# These are varibles for the commands below
+svm_ldap_configname: lab
+svm_ldap_server: 172.30.16.226
+
+# These are standard container information
+svm_ldap_base_dn: "dc=lab,ou=bu,o=company"
+svm_ldap_user_dn: "cn=users,dc=lab,ou=bu,o=company"
+svm_ldap_group_dn: "cn=groups,dc=lab,ou=bu,o=company"
+svm_ldap_netgroup_dn: "cn=netgroup,dc=lab,ou=bu,o=company"
+
+
+# LDAP SVM Client-Config
+svm_ldap: "vserver services name-service ldap client create -client-config {{ svm_ldap_configname }} -servers {{ svm_ldap_server }} -schema RFC-2307 -port 389 -query-timeout 3 -min-bind-level anonymous -base-dn {{ svm_ldap_base_dn }} -user-dn {{ svm_ldap_user_dn }} -group-dn {{ svm_ldap_group_dn }} -netgroup-dn {{ svm_ldap_netgroup_dn }}  -base-scope subtree -use-start-tls false -session-security none -vserver {{ svm }}"
+
+# LDAP NSS Configuration
+svm_nss_list:
+  -  "vserver services name-service ns-switch modify -vserver {{ svm }} -database hosts -sources $nsHostSource"
+  -  "vserver services name-service ns-switch modify -vserver {{ svm }} -database group -sources $nsGroupSource"
+  -  "vserver services name-service ns-switch modify -vserver {{ svm }} -database passwd -sources $nsPasswordSource"
+  -  "vserver services name-service ns-switch modify -vserver {{ svm }} -database netgroup -sources $nsNetgroupSource"
+
+
+  # User and Role Configuration Varibles
+role_cmds:
+  - { name: 'netapp_harvest', cmddir: 'version', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'cluster identity show', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'cluster show', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'system node show', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'statistics', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'lun show', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'network interface show', level: 'readonly', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_harvest', cmddir: 'qos workload show', level: 'readonly', svm: '"{{ cluster }}"' }
+
+user_list:
+  - { name: 'netapp_harvest', app: 'ontapi', auth: 'password', role: 'netapp-harvest-role', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_pse', app: 'ontapi', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_pse', app: 'console', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_pse', app: 'http', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_pse', app: 'service-processor', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'netapp_pse', app: 'ssh', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'storage_api', app: 'ontapi', auth: 'password', role: 'admin', pass: 'T3mp-p@55', svm: '"{{ cluster }}"' }
+  - { name: 'storage_api', app: 'ontapi', auth: 'password', role: 'vsadmin', pass: 'T3mp-p@55', svm: '"{{ svm }}"' }
+  - { name: 'snmp', app: 'snmp', auth: 'usm', role: 'readonly', pass: 'T3mp-p@55', svm: '"{{ svm }}"' }
