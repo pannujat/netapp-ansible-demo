@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  name: SVM Create Secret Volume
+  gather_facts: false
+  vars:
+    login: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
+    file: password.yml
+  vars_files:
+  - "{{ file }}"
+  tasks:
+
+  - name: Create volume
+    na_ontap_volume:
+      state: "{{ state }}"
+      name: "{{ secret_vol }}"
+      aggregate_name: "{{ svm_aggregate }}"
+      size: "{{ size }}"
+      size_unit: "{{ units }}"
+      policy: "{{ export_policy_name }}"
+      junction_path: "/{{ secret_vol }}"
+      space_guarantee: "none"
+      vserver: "{{ svm }}"
+      <<: *login

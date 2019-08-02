@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  name: Volume Data Protection
+  gather_facts: false
+  vars:
+    login: &login
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    file: source95_vars.yml
+  vars_files:
+  - "{{ file }}"
+  tasks:
+
+  - name: Create Destination Volume
+    na_ontap_volume:
+      state: "{{ state }}"
+      name: "{{ volume_name }}"
+      aggregate_name: "{{ peer_dest_aggregate }}"
+      size: "{{ size }}"
+      size_unit: "{{ units }}"
+      type: "{{ vol_type }}"
+      space_guarantee: "none"
+      vserver: "{{ peer_vserver }}"
+      hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
+
+  - name: Create Custom Job Schedule for SnapMirror
+    na_ontap_job_schedule:
+      state: "{{ state }}"
+      name: "1min"
+      job_minutes: -1
+      hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
+
+  - name: Create SnapMirror on Destination
+    na_ontap_snapmirror:
+      state: "{{ state }}"
+      source_volume: "{{ volume_name }}"
+      destination_volume: "{{ volume_name }}"
+      source_vserver: "{{ svm }}"
+      destination_vserver: "{{ peer_vserver }}"
+      schedule: "1min"
+      hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
+
+  - name: sleep for 60 seconds and continue with play
+    wait_for: timeout=60
+    delegate_to: localhost
+
+  - name: Mount volume
+    na_ontap_volume:
+      state: "{{ state }}"
+      name: "{{ volume_name }}"
+      junction_path: "/{{ volume_name }}"
+      vserver: "{{ peer_vserver }}"
+      hostname: "{{ dest_netapp_hostname }}"
+      <<: *login

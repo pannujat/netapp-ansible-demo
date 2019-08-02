@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: no
-  name: Source Cluster Config
+  name: Destination Cluster Config
   vars:
     input: &login
       hostname: "{{ netapp_hostname }}"
@@ -24,22 +24,27 @@
     na_ontap_gather_facts:
       state: info
       <<: *login
-      https: true
       ontapi: 32
-      validate_certs: false
   - import_role:
       name: na_ontap_cluster_config
     vars:
       <<: *login
 
+###
 # Standard Cluster configuration section
+###
 
   # Standardize naming and set common root aggr/vol settings
-#  - name: rename node
-#    na_ontap_node:
-#      from_name: "{{ node_from_name }}"
-#      name: "{{ cluster }}-prime"
-#      <<: *login
+  # I keep getting the error: The task includes an option with an undefined variable.
+  # The error was: 'dict object' has no attribute 'from_name'
+
+  - name: rename node
+    na_ontap_node:
+       from_name: "{{ item.from_name }}"
+       name: "{{ item.name }}"
+       <<: *login
+    with_list: "{{ node_names }}"
+
 
   - name: rename root aggregates
     na_ontap_aggregate:
@@ -49,3 +54,73 @@
       name: "{{ item.rename }}"
       <<: *login
     with_items: "{{ aggr_list }}"
+
+###
+# Standard SVM configuration section
+###
+
+# ROLE: na_ontap_vserver_config
+
+  - name: Get Ontapi version
+    na_ontap_gather_facts:
+      state: info
+      <<: *login
+      ontapi: 32
+  - import_role:
+      name: na_ontap_vserver_create
+    vars:
+      <<: *login
+
+# non-ROLE: Update default NFS Server configuration
+
+#  - name: Manage NFS
+#    na_ontap_nfs:
+#      state: "{{ state }}"
+#      service_state: started
+#      vserver: "{{ SVM }}"
+#      nfsv3: enabled
+#      nfsv4: disabled
+#      nfsv41: disabled
+#      tcp: enabled
+#      udp: disabled
+#      vstorage_state: disabled
+#      <<: *login
+
+# Managing Export-policies
+
+  - name: Create SVM Export-policy
+    na_ontap_export_policy:
+      state: "{{ state }}"
+      name: "{{ export_policy_name }}"
+      vserver: "{{ SVM }}"
+      <<: *login
+
+  - name: Setup "Default" and SVM Export-policies
+    na_ontap_export_policy_rule:
+      state: "{{ state }}"
+      policy_name: "{{ item.name }}"
+      vserver: "{{ SVM }}"
+      client_match:
+      ro_rule: "{{ item.ro_rule }}"
+      rw_rule: "{{ item.rw_rule }}"
+      rule_index: "{{ item.rule_index }}"
+      super_user_security: "{{ item.super_user_security }}"
+      <<: *login
+    with_items: "{{ default_expol_rules }}"
+
+# Creating a Volume
+
+  - name: Create volume
+    na_ontap_volume:
+      state: "{{ state }}"
+      name: "{{ item.volume_name }}"
+      aggregate_name: "{{ item.svm_aggregate }}"
+      size: "{{ item.vol_size }}"
+      size_unit: "{{ item.vol_size_unit }}"
+      policy: "{{ item.vol_policy }}"
+      junction_path: "{{ item.vol_junc }}"
+      space_guarantee: "{{ item.vol_space_gar }}"
+      precent_snapshot_space: "{{ item.vol_precent_snapshot_space }}"
+      vserver: "{{ svm }}"
+      <<: *login
+    with_items: "{{ svm_volume_list }}"

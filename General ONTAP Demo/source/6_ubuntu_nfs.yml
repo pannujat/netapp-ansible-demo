@@ -1,0 +1,54 @@
+---
+- hosts: ubuntu
+  name: Mount NFS on client
+  become: true
+  become_method: sudo
+  vars:
+    username: "ken"
+    volume_name: "svm_test"
+    state: present
+#  vars_prompt:
+#  - name: "password"
+#    prompt: "Password:"
+  tasks:
+
+#  - name: Ensure NFS sommon is installed
+#    apt: name=nfs-common state=present update_cache=yes
+
+  - name: Update fstab file with PROD
+    lineinfile:
+      state: "{{ state }}"
+      path: /etc/fstab
+      line: "172.30.16.213:/{{ volume_name }} /mnt/ontap nfs defaults 0 0"
+
+  - name: Verify mount PROD directory exists
+    file:
+      state: "{{ state }}"
+      path: /mnt/ontap
+      state: directory
+
+  - name: Mount nfs export
+    mount:
+      state: "{{ state }}"
+      path: /mnt/ontap
+      src: "172.30.16.213:/{{ volume_name }}"
+      fstype: nfs
+
+  - name: Update fstab file with DR
+    lineinfile:
+      state: "{{ state }}"
+      path: /etc/fstab
+      line: "172.30.16.218:/{{ volume_name }} /mnt/ontap_dr nfs defaults 0 0"
+
+  - name: Verify mount directory DR exists
+    file:
+      state: "{{ state }}"
+      path: /mnt/ontap_dr
+      state: directory
+
+  - name: Mount nfs export
+    mount:
+      state: "{{ state }}"
+      path: /mnt/ontap_dr
+      src: "172.30.16.218:/{{ volume_name }}"
+      fstype: nfs

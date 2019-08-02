@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    login: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    file: source95_vars.yml
+  vars_files:
+    - "{{ file }}"
+  name: Setting up SnapMirror
+  tasks:
+
+  - name: Create cluster peer
+    na_ontap_cluster_peer:
+      state: "{{ state }}"
+      source_intercluster_lifs: "{{ source_intercluster_lif }}"
+      dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
+      passphrase: "{{ passphrase }}"
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
+  - name: Source vserver peer create
+    na_ontap_vserver_peer:
+      state: "{{ state }}"
+      peer_vserver: "{{ peer_vserver }}"
+      peer_cluster: "{{ peer_cluster }}"
+      vserver: "{{ svm }}"
+      applications: snapmirror
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
