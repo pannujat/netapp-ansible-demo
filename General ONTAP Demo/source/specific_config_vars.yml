@@ -1,4 +1,5 @@
 cluster: source95
+cluster: sour95
 
 netapp_hostname: 172.30.16.210
 netapp_username: admin
