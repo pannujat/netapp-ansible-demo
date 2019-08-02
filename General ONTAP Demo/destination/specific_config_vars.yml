@@ -89,7 +89,7 @@ node_names:
 
 # Rename root aggregate section
 aggr_list:
-  - { name: 'aggr0_source95_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+  - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
 
 # Rename root volume section
 vol0_list:

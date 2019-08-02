@@ -1,9 +1,11 @@
-cluster: source95
+cluster: dest96
 
-netapp_hostname: 172.30.16.210
+netapp_hostname: 172.30.16.215
 netapp_username: admin
 # Leave commented out for vars_promtp to work
 #netapp_password:
+
+state: present
 
 # System Specific Varibles
 
@@ -20,16 +22,22 @@ netapp_username: admin
 ###
 
 # SVM Varibles
-svm: source
-svm_aggregate: aggr1
+svm: destination
+svm_aggregate: dest96_01_aggr1
 svm_aggr_list:
-svm_port: e0c
+svm_port: a0a
 svm_address: 172.30.16.213
 svm_netmask: 255.255.0.0
 svm_gateway: 172.30.16.2
 
 svm_root_vol_security: unix
 svm_export_policy_name: data
+
+# Export-Policy Management
+export_policy_rules:
+   - { name: 'default', client_match: '172.30.16.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
+   - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+   - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
 
 # ansible-vault testing varibles
 
@@ -40,10 +48,6 @@ units: gb
 vol_type: dp
 
 license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA,SOHOURRRYVHXCFABGAAAAAAAAAAA,KQSRRRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,GUJZTRRRYVHXCFABGAAAAAAAAAAA,OSYVWRRRYVHXCFABGAAAAAAAAAAA,UZLKTRRRYVHXCFABGAAAAAAAAAAA,EJFDVRRRYVHXCFABGAAAAAAAAAAA
-
-state: present
-
-
 
 # Role varibles
 
@@ -65,15 +69,16 @@ vdns_servers: "172.30.16.2,8.8.8.8"
 ntp_srvr: time.nist.gov
 
 # Networking Varibles
-ifgrp_ports: "[e0e, e0f]"
+#ifgrp_ports: "[e0e, e0f]"
+ifgrp_ports: "e0e,e0f"
 vlan_id: 201
 
 # Standard Configuration varibles
 
 # Configure the service processors.
 service_processor:
-    - { node: 'newclu01n01a', ip: '10.253.168.110', gw: '10.253.168.1', mask: '255.255.255.0' }
-    - { node: 'newclu01n01b', ip: '10.253.168.112', gw: '10.253.168.1', mask: '255.255.255.0' }
+  - { node: 'newclu01n01a', ip: '10.253.168.110', gw: '10.253.168.1', mask: '255.255.255.0' }
+  - { node: 'newclu01n01b', ip: '10.253.168.112', gw: '10.253.168.1', mask: '255.255.255.0' }
 
 ###
 # Renaming section
@@ -82,14 +87,14 @@ service_processor:
 # Rename node section - Ex: cluster-01 to clusterh01a
 nodename: h
 node_names:
-  - { name: "{{ cluster }}-01", rename: "{{ cluster }}{{ nodename }}01a" }
-  - { name: "{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b" }
-  - { name: "{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a" }
-  - { name: "{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b" }
+  - { from_name: "{{ cluster }}-01", name: "{{ cluster }}{{ nodename }}01a" }
+#  - { from_name: "{{ cluster }}-02", name: "{{ cluster }}{{ nodename }}01b" }
+#  - { from_name: "{{ cluster }}-03", name: "{{ cluster }}{{ nodename }}02a" }
+#  - { from_name: "{{ cluster }}-04", name: "{{ cluster }}{{ nodename }}02b" }
 
 # Rename root aggregate section
 aggr_list:
-  - { name: 'aggr0_source95_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+  - { name: 'aggr0_dest95_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
 
 # Rename root volume section
 vol0_list:
