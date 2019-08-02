@@ -65,7 +65,7 @@ vdns_servers: "172.30.16.2,8.8.8.8"
 ntp_srvr: time.nist.gov
 
 # Networking Varibles
-ifgrp_ports: "e0e,e0f"
+ifgrp_ports: "[e0e, e0f]"
 vlan_id: 201
 
 # Standard Configuration varibles

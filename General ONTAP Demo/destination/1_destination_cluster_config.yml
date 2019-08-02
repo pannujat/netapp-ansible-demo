@@ -24,9 +24,7 @@
     na_ontap_gather_facts:
       state: info
       <<: *login
-      https: true
       ontapi: 32
-      validate_certs: false
   - import_role:
       name: na_ontap_cluster_config
     vars:
