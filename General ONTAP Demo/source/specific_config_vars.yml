@@ -1,4 +1,4 @@
-cluster: source95
+cluster: sour95
 
 netapp_hostname: 172.30.16.210
 netapp_username: admin
@@ -83,9 +83,9 @@ service_processor:
 nodename: h
 node_names:
   - { name: "{{ cluster }}-01", rename: "{{ cluster }}{{ nodename }}01a" }
-  - { name: "{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b" }
-  - { name: "{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a" }
-  - { name: "{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b" }
+#  - { name: "{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b" }
+#  - { name: "{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a" }
+#  - { name: "{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b" }
 
 # Rename root aggregate section
 aggr_list:
