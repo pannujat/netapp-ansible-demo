@@ -38,12 +38,12 @@
   # I keep getting the error: The task includes an option with an undefined variable.
   # The error was: 'dict object' has no attribute 'from_name'
 
-#  - name: rename node
-#    na_ontap_node:
-#       from_name: "{{ item.from_name }}"
-#       name: "{{ item.name }}"
-#       <<: *login
-#    with_list: "{{ node_names }}"
+  - name: rename node
+    na_ontap_node:
+       from_name: "{{ item.from_name }}"
+       name: "{{ item.name }}"
+       <<: *login
+    with_list: "{{ node_names }}"
 
 
   - name: rename root aggregates

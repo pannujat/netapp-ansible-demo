@@ -1,6 +1,6 @@
-cluster: dest96
+cluster: source95
 
-netapp_hostname: 172.30.16.215
+netapp_hostname: 172.30.16.210
 netapp_username: admin
 # Leave commented out for vars_promtp to work
 #netapp_password:
@@ -22,8 +22,8 @@ state: present
 ###
 
 # SVM Varibles
-svm: destination
-svm_aggregate: dest96_01_aggr1
+svm: source
+svm_aggregate: aggr1
 svm_aggr_list:
 svm_port: a0a
 svm_address: 172.30.16.213
@@ -94,7 +94,7 @@ node_names:
 
 # Rename root aggregate section
 aggr_list:
-  - { name: 'aggr0_dest95_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+  - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
 
 # Rename root volume section
 vol0_list:
