@@ -75,11 +75,6 @@ vlan_id: 201
 
 # Standard Configuration varibles
 
-# Configure the service processors.
-service_processor:
-  - { node: 'newclu01n01a', ip: '10.253.168.110', gw: '10.253.168.1', mask: '255.255.255.0' }
-  - { node: 'newclu01n01b', ip: '10.253.168.112', gw: '10.253.168.1', mask: '255.255.255.0' }
-
 ###
 # Renaming section
 ###
