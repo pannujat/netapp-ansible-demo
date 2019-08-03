@@ -1,18 +1,24 @@
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: no
+  name: SnapMirror Configuration
   vars:
-    login: &login
+    input: &login
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-    file: source95_vars.yml
   vars_files:
-    - "{{ file }}"
-  name: Setting up SnapMirror
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
   tasks:
+
+# ROLE: na_ontap_config_cluster
 
   - name: Create cluster peer
     na_ontap_cluster_peer:

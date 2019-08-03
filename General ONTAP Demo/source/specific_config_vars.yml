@@ -99,3 +99,17 @@ aggr_list:
 # Rename root volume section
 vol0_list:
   - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root" }
+
+###
+# SnapMirror Configuration section
+###
+
+passphrase: seespotrun
+
+peer_vserver: destination
+peer_cluster: dest96
+peer_dest_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
+
+source_intercluster_lif: 172.30.16.212
+dest_intercluster_lif: 172.30.16.217
+dest_netapp_hostname: 172.30.16.215
