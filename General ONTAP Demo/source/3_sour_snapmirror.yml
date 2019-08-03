@@ -27,7 +27,7 @@
       aggregate_name: "{{ peer_dest_aggregate }}"
       size: "{{ size }}"
       size_unit: "{{ units }}"
-      type: "{{ vol_type }}"
+      type: "{{ vol_sm_type }}"
       space_guarantee: "none"
       vserver: "{{ peer_vserver }}"
       hostname: "{{ dest_netapp_hostname }}"
@@ -61,7 +61,7 @@
     wait_for: timeout=60
     delegate_to: localhost
 
-# Mount volume(s) on SVM namespace 
+# Mount volume(s) on SVM namespace
 
   - name: Mount volume
     na_ontap_volume:

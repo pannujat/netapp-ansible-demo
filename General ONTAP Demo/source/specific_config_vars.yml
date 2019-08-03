@@ -113,3 +113,14 @@ peer_dest_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
 source_intercluster_lif: 172.30.16.212
 dest_intercluster_lif: 172.30.16.217
 dest_netapp_hostname: 172.30.16.215
+
+vol_sm_type: dp
+
+###
+# Ansible-Vault testing
+###
+
+volume_name: svm_test
+secret_vol: secret_vol
+secret_size: 1
+secret_units: gb
