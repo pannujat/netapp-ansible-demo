@@ -13,10 +13,10 @@ license_codes:
 
 # cluster_config role
 
-#disks:	# at 2.7 the disks module assigns all visiable disks to a node.
-#  - "{{ cluster }}-01"
+disks:	# at 2.7 the disks module assigns all visiable disks to a node.
+  - "{{ cluster }}-01"
 
-motd: "{{ motd_mess }}"
+#motd: "{{ motd_mess }}"
 
 dns:	# Set DNS for Cluster
   - { dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
@@ -28,28 +28,28 @@ snmp:	# Setup or modify an SNMP community
   - { community_name: public, access_control: ro }
 
 aggrs:	# Create one or more Aggregates.
-  - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+  - { name: "{{ cluster }}{{ nodename }}01a_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
 
 ports:  # Set MTU for ports.
-  - { node: "{{ cluster }}-01", port: e0a, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-01", port: e0b, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}{{ nodename }}01a", port: e0a, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}{{ nodename }}01a", port: e0b, mtu: 1500, flowcontrol: none }
 #  - { node: "{{ cluster }}-01", port: e0c, mtu: 1500 } vsim MGMT LIF
-  - { node: "{{ cluster }}-01", port: e0d, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}{{ nodename }}01a", port: e0d, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}{{ nodename }}01a", port: e0e, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}{{ nodename }}01a", port: e0f, mtu: 1500, flowcontrol: none }
 
 ifgrps:  # Create and add ports to Interface Groups.
-  - { name: a0a, node: "{{ cluster }}-01", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
+  - { name: a0a, node: "{{ cluster }}{{ nodename }}01a", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
 
 vlans:  # Create vlans on LIFS
-  - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", port: a0a }
+  - { id: "{{ vlan_id }}", node: "{{ cluster }}{{ nodename }}01a", port: a0a }
 
 bcasts:  # Create Broadcast domains
-  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:a0a,{{ cluster }}-01:a0a-201' }
-  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
+  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}{{ nodename }}01a:a0a,{{ cluster }}{{ nodename }}01a:a0a-201' }
+  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}{{ nodename }}01a:e0d' }
 
 inters:  # Create intercluster lifs for SnapMirror.
-  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}{{ nodename }}01a", port: e0c }
 
 ###
 # vserver_create role
@@ -58,11 +58,12 @@ inters:  # Create intercluster lifs for SnapMirror.
 vservers:  # Vservers to create
   - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
 
+# vserver_dns can't communicate off local subnet due to a race condition
 vserver_dns:  # DNS at the Vserver level.
-  - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ vdns_servers }}" }
+  - { vserver: "{{ svm }}", dns_domains: "{{ svm_dns_domain }}", dns_nameservers: "{{ svm_dns_servers }}" }
 
 lifs:  # interfaces for the Vservers being created
-  - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
+  - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}{{ nodename }}01a", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
 
 gateway: # To configure the default route/gateway for the vservers
   - { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }

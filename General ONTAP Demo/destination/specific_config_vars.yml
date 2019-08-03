@@ -69,7 +69,6 @@ motd_mess: |
 dns_domain: example.local
 dns_servers: "172.30.16.2,8.8.8.8"
 
-
 # NTP Server
 ntp_srvr: time.nist.gov
 

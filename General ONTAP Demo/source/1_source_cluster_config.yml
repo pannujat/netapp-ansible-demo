@@ -91,22 +91,23 @@
   - name: Create SVM Export-policy
     na_ontap_export_policy:
       state: "{{ state }}"
-      name: "{{ export_policy_name }}"
-      vserver: "{{ SVM }}"
+      name: "{{ svm_export_policy_name }}"
+      vserver: "{{ svm }}"
       <<: *login
 
   - name: Setup "Default" and SVM Export-policies
     na_ontap_export_policy_rule:
       state: "{{ state }}"
       policy_name: "{{ item.name }}"
-      vserver: "{{ SVM }}"
-      client_match:
+      vserver: "{{ svm }}"
+  #    client_match: 0.0.0.0/0,1.1.1.0/24
+      client_match: "{{ item.client_match }}"
       ro_rule: "{{ item.ro_rule }}"
       rw_rule: "{{ item.rw_rule }}"
       rule_index: "{{ item.rule_index }}"
       super_user_security: "{{ item.super_user_security }}"
       <<: *login
-    with_items: "{{ default_expol_rules }}"
+    with_items: "{{ export_policy_rules_list }}"
 
 # Creating a Volume
 
