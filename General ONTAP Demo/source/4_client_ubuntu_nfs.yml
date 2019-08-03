@@ -1,11 +1,11 @@
 ---
 - hosts: ubuntu
-  name: Mount NFS on client
+  name: Mount both source and destination volumes via NFS on client
   become: true
   become_method: sudo
   vars:
     username: "ken"
-    volume_name: "svm_test"
+#    volume_name: "svm_test"
     state: present
 #  vars_prompt:
 #  - name: "password"

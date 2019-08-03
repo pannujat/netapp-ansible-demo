@@ -6,4 +6,11 @@
 # Top-level are Demo containers for Ansible playbooks
 Element - Contains a simple volume creation workflow
 
-General ONTAP Demo - Contains a 2 node, source and destination, configuration, provision, SnapMirror replication and client access
+Requirements:
+- Element OS Demo-node or similar
+
+General ONTAP Demo - Is a 2 node configuration workflow, source and destination, configuration, provision, SnapMirror replication and client access
+
+Requirements:
+- destination system (vsim)
+- source system (vsim)
