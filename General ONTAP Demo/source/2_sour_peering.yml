@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: no
-  name: SnapMirror Configuration
+  name: Peering Configuration - Cluster and SVM
   vars:
     input: &login
       hostname: "{{ netapp_hostname }}"

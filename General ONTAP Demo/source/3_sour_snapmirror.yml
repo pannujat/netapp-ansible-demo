@@ -1,17 +1,24 @@
 ---
 - hosts: localhost
-  name: Volume Data Protection
-  gather_facts: false
+  gather_facts: no
+  name: SnapMirror Configuration
   vars:
-    login: &login
+    input: &login
+      hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-    file: source95_vars.yml
   vars_files:
-  - "{{ file }}"
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
   tasks:
+
+# SnapMirror Configuration
 
   - name: Create Destination Volume
     na_ontap_volume:
@@ -25,6 +32,7 @@
       vserver: "{{ peer_vserver }}"
       hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+# Create a custom Schedule
 
   - name: Create Custom Job Schedule for SnapMirror
     na_ontap_job_schedule:
@@ -33,6 +41,8 @@
       job_minutes: -1
       hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+
+# SnapMirror Configuration on Destination
 
   - name: Create SnapMirror on Destination
     na_ontap_snapmirror:
@@ -45,9 +55,13 @@
       hostname: "{{ dest_netapp_hostname }}"
       <<: *login
 
+# SWait for SnapMirror to initialize
+
   - name: sleep for 60 seconds and continue with play
     wait_for: timeout=60
     delegate_to: localhost
+
+# Mount volume(s) on SVM namespace 
 
   - name: Mount volume
     na_ontap_volume:
