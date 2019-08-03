@@ -31,8 +31,8 @@ svm_address: 172.30.16.218
 svm_netmask: 255.255.0.0
 svm_gateway: 172.30.16.2
 
-vdns_domain: "{{ dns_domain }}"
-vdns_servers: "{{ dns_servers }}"
+svm_dns_domain: "{{ dns_domain }}"
+svm_dns_servers: "{{ dns_servers }}"
 
 svm_root_vol_security: unix
 svm_export_policy_name: data
