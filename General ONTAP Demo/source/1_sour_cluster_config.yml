@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: no
-  name: Destination Cluster Config
+  name: Source Cluster Config
   vars:
     input: &login
       hostname: "{{ netapp_hostname }}"
