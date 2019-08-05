@@ -1,4 +1,4 @@
-cluster: sour95
+cluster: source95
 
 netapp_hostname: 172.30.16.210
 netapp_username: admin
@@ -38,7 +38,7 @@ svm_root_vol_security: unix
 svm_export_policy_name: data
 
 svm_volume_list:
-  - { vol_name: "vol01", svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: 1, vol_size_unit: 'gb', vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_volume_name }}", vol_space_gar: "none", vol_precent_snapshot_space: '0' }
+  - { volume_name: "vol01", svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: 1, vol_size_unit: 'gb', vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_volume_name }}", vol_space_gar: "none", vol_precent_snapshot_space: '0' }
 
 # Export-Policy Management
 export_policy_rules_list:
@@ -46,13 +46,7 @@ export_policy_rules_list:
   - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
   - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
 
-# ansible-vault testing varibles
-
-svm_volume_name: svm_test
-secret_vol: secret_vol
-size: 1
-units: gb
-vol_type: dp
+# ROLE Varibles
 
 license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA,SOHOURRRYVHXCFABGAAAAAAAAAAA,KQSRRRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,GUJZTRRRYVHXCFABGAAAAAAAAAAA,OSYVWRRRYVHXCFABGAAAAAAAAAAA,UZLKTRRRYVHXCFABGAAAAAAAAAAA,EJFDVRRRYVHXCFABGAAAAAAAAAAA
 
@@ -116,9 +110,10 @@ dest_intercluster_lif: 172.30.16.217
 dest_netapp_hostname: 172.30.16.215
 
 vol_sm_type: dp
+vol_type: dp
 
 ###
-# Ansible-Vault testing
+# Ansible-Vault testing varibles
 ###
 
 volume_name: svm_test
