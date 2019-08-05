@@ -12,6 +12,8 @@ license_codes:
 ###
 
 # cluster_config role
+# nodename reflects the default naming convention in the role.
+# Later when the nodes have been renamed, the udated format can be used.
 
 disks:	# at 2.7 the disks module assigns all visiable disks to a node.
   - "{{ cluster }}-01"
@@ -31,25 +33,25 @@ aggrs:	# Create one or more Aggregates.
   - { name: "{{ cluster }}{{ nodename }}01a_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
 
 ports:  # Set MTU for ports.
-  - { node: "{{ cluster }}{{ nodename }}01a", port: e0a, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}{{ nodename }}01a", port: e0b, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0a, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0b, mtu: 1500, flowcontrol: none }
 #  - { node: "{{ cluster }}-01", port: e0c, mtu: 1500 } vsim MGMT LIF
-  - { node: "{{ cluster }}{{ nodename }}01a", port: e0d, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}{{ nodename }}01a", port: e0e, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}{{ nodename }}01a", port: e0f, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0d, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
+  - { node: "{{ cluster }}-01", port: e0f, mtu: 1500, flowcontrol: none }
 
 ifgrps:  # Create and add ports to Interface Groups.
-  - { name: a0a, node: "{{ cluster }}{{ nodename }}01a", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
+  - { name: a0a, node: "{{ cluster }}-01", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
 
 vlans:  # Create vlans on LIFS
-  - { id: "{{ vlan_id }}", node: "{{ cluster }}{{ nodename }}01a", port: a0a }
+  - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", port: a0a }
 
 bcasts:  # Create Broadcast domains
-  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}{{ nodename }}01a:a0a,{{ cluster }}{{ nodename }}01a:a0a-201' }
-  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}{{ nodename }}01a:e0d' }
+  - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:a0a,{{ cluster }}-01:a0a-201' }
+  - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
 
 inters:  # Create intercluster lifs for SnapMirror.
-  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}{{ nodename }}01a", port: e0c }
+  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
 
 ###
 # vserver_create role
