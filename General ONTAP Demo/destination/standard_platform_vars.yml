@@ -12,7 +12,7 @@ license_codes:
 ###
 
 # cluster_config role
-# nodename reflects the default naming convention in the role.
+# Note: nodename reflects the default naming convention in the role.
 # Later when the nodes have been renamed, the udated format can be used.
 
 disks:	# at 2.7 the disks module assigns all visiable disks to a node.
