@@ -43,12 +43,12 @@
   # Standardize root volumes based on naming standards
 
   - name: rename root volumes
-    na_ontap_aggregate:
+    na_ontap_volume:
       state: present
-      service_state: online
       from_name: "{{ item.name }}"
       name: "{{ item.rename }}"
       percent_snapshot_space: 0
+      vserver: "{{ item.vserver }}"
       <<: *login
     with_items: "{{ vol0_list }}"
 
@@ -65,12 +65,12 @@
 
   # Standardize node naming based on naming standards
 
-  - name: rename node
-    na_ontap_node:
-       from_name: "{{ item.from_name }}"
-       name: "{{ item.name }}"
-       <<: *login
-    with_list: "{{ node_names }}"
+#  - name: rename node
+#    na_ontap_node:
+#       from_name: "{{ item.from_name }}"
+#       name: "{{ item.name }}"
+#       <<: *login
+#    with_list: "{{ node_names }}"
 
 ###
 # Standard SVM configuration section

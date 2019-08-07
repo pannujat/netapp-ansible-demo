@@ -101,7 +101,7 @@ aggr_list:
 
 # Rename root volume section
 vol0_list:
-  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root" }
+  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
 #  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
 #  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
 #  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }
