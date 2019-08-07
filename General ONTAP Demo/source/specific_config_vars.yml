@@ -38,7 +38,7 @@ svm_root_vol_security: unix
 svm_export_policy_name: data
 
 svm_volume_list:
-  - { volume_name: "vol01", svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: 1, vol_size_unit: 'gb', vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_volume_name }}", vol_space_gar: "none", vol_precent_snapshot_space: '0' }
+  - { svm_volume_name: "vol01", svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: 1, vol_size_unit: 'gb', vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_volume_name }}", vol_space_gar: "none", vol_precent_snapshot_space: '0' }
 
 # Export-Policy Management
 export_policy_rules_list:
@@ -97,7 +97,7 @@ aggr_list:
 
 # Rename root volume section
 vol0_list:
-  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root" }
+  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
 #  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
 #  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
 #  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }
