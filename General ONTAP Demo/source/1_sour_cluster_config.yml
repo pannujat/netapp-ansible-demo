@@ -127,14 +127,14 @@
   - name: Create volume
     na_ontap_volume:
       state: "{{ state }}"
-      name: "{{ item.svm_volume_name }}"
-      aggregate_name: "{{ item.svm_aggregate }}"
+      name: "{{ item.vol_name }}"
+      aggregate_name: "{{ item.vol_aggregate }}"
       size: "{{ item.vol_size }}"
       size_unit: "{{ item.vol_size_unit }}"
       policy: "{{ item.vol_policy }}"
       junction_path: "{{ item.vol_junc }}"
       space_guarantee: "{{ item.vol_space_gar }}"
-      precent_snapshot_space: "{{ item.vol_precent_snapshot_space }}"
+      percent_snapshot_space: "{{ item.vol_percent_snapshot_space }}"
       vserver: "{{ svm }}"
       <<: *login
     with_items: "{{ svm_volume_list }}"
