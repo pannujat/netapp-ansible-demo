@@ -38,7 +38,15 @@
 
   # Standardize root volumes based on naming standards
 
-
+  - name: rename root volumes
+    na_ontap_aggregate:
+      state: present
+      service_state: online
+      from_name: "{{ item.name }}"
+      name: "{{ item.rename }}"
+      percent_snapshot_space: 0
+      <<: *login
+    with_items: "{{ vol0_list }}"
 
   # Standardize root aggergate based on naming standards
 

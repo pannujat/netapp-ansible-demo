@@ -94,7 +94,14 @@ node_names:
 # Rename root aggregate section
 aggr_list:
   - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+  #  - { name: "aggr0_{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b_aggr0" }
+  #  - { name: "aggr0_{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a_aggr0" }
+  #  - { name: "aggr0_{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
+
 
 # Rename root volume section
 vol0_list:
   - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root" }
+#  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
+#  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
+#  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }

@@ -34,17 +34,25 @@
 # Standard Cluster configuration section
 ###
 
-  # Standardize naming and set common root aggr/vol settings
-  # I keep getting the error: The task includes an option with an undefined variable.
-  # The error was: 'dict object' has no attribute 'from_name'
+###
+# Standard Cluster configuration section
+###
 
-  - name: rename node
-    na_ontap_node:
-       from_name: "{{ item.from_name }}"
-       name: "{{ item.name }}"
-       <<: *login
-    with_list: "{{ node_names }}"
+  # Standardize naming and set common settings for root aggr/vol, and node names
 
+  # Standardize root volumes based on naming standards
+
+  - name: rename root volumes
+    na_ontap_aggregate:
+      state: present
+      service_state: online
+      from_name: "{{ item.name }}"
+      name: "{{ item.rename }}"
+      percent_snapshot_space: 0
+      <<: *login
+    with_items: "{{ vol0_list }}"
+
+  # Standardize root aggergate based on naming standards
 
   - name: rename root aggregates
     na_ontap_aggregate:
@@ -54,6 +62,15 @@
       name: "{{ item.rename }}"
       <<: *login
     with_items: "{{ aggr_list }}"
+
+  # Standardize node naming based on naming standards
+
+  - name: rename node
+    na_ontap_node:
+       from_name: "{{ item.from_name }}"
+       name: "{{ item.name }}"
+       <<: *login
+    with_list: "{{ node_names }}"
 
 ###
 # Standard SVM configuration section
