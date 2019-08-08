@@ -7,6 +7,9 @@
     username: "ken"
 #    volume_name: "svm_test"
     state: present
+  vars_files:
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
 #  vars_prompt:
 #  - name: "password"
 #    prompt: "Password:"
@@ -19,7 +22,7 @@
     lineinfile:
       state: "{{ state }}"
       path: /etc/fstab
-      line: "172.30.16.213:/{{ volume_name }} /mnt/ontap nfs defaults 0 0"
+      line: "172.30.16.213:/{{ svm_vol_name }} /mnt/ontap nfs defaults 0 0"
 
   - name: Verify mount PROD directory exists
     file:
@@ -31,14 +34,14 @@
     mount:
       state: "{{ state }}"
       path: /mnt/ontap
-      src: "172.30.16.213:/{{ volume_name }}"
+      src: "172.30.16.213:/{{ svm_vol_name }}"
       fstype: nfs
 
   - name: Update fstab file with DR
     lineinfile:
       state: "{{ state }}"
       path: /etc/fstab
-      line: "172.30.16.218:/{{ volume_name }} /mnt/ontap_dr nfs defaults 0 0"
+      line: "172.30.16.218:/{{ svm_vol_name }} /mnt/ontap_dr nfs defaults 0 0"
 
   - name: Verify mount directory DR exists
     file:
@@ -50,5 +53,5 @@
     mount:
       state: "{{ state }}"
       path: /mnt/ontap_dr
-      src: "172.30.16.218:/{{ volume_name }}"
+      src: "172.30.16.218:/{{ svm_vol_name }}"
       fstype: nfs
