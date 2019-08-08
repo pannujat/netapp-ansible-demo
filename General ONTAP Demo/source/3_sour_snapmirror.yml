@@ -23,15 +23,16 @@
   - name: Create Destination Volume
     na_ontap_volume:
       state: "{{ state }}"
-      name: "{{ volume_name }}"
+      name: "{{ svm_vol_name }}"
       aggregate_name: "{{ peer_dest_aggregate }}"
-      size: "{{ size }}"
-      size_unit: "{{ units }}"
+      size: "{{ dest_vol_size }}"
+      size_unit: "{{ dest_vol_size_units }}"
       type: "{{ vol_sm_type }}"
       space_guarantee: "none"
       vserver: "{{ peer_vserver }}"
       hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+
 # Create a custom Schedule
 
   - name: Create Custom Job Schedule for SnapMirror
@@ -47,8 +48,8 @@
   - name: Create SnapMirror on Destination
     na_ontap_snapmirror:
       state: "{{ state }}"
-      source_volume: "{{ volume_name }}"
-      destination_volume: "{{ volume_name }}"
+      source_volume: "{{ svm_vol_name }}"
+      destination_volume: "{{ svm_vol_name }}"
       source_vserver: "{{ svm }}"
       destination_vserver: "{{ peer_vserver }}"
       schedule: "1min"
@@ -66,7 +67,7 @@
   - name: Mount volume
     na_ontap_volume:
       state: "{{ state }}"
-      name: "{{ volume_name }}"
+      name: "{{ svm_vol_name }}"
       junction_path: "/{{ volume_name }}"
       vserver: "{{ peer_vserver }}"
       hostname: "{{ dest_netapp_hostname }}"

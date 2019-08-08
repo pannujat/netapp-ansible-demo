@@ -51,7 +51,7 @@ bcasts:  # Create Broadcast domains
   - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
 
 inters:  # Create intercluster lifs for SnapMirror.
-  - { name: intercluster_1, address: 172.30.16.212, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+  - { name: intercluster_1, address: 172.30.16.217, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
 
 ###
 # vserver_create role

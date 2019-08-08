@@ -1,18 +1,30 @@
 ---
 - hosts: localhost
-  name: SVM Create Secret Volume
-  gather_facts: false
+  gather_facts: no
+  name: Using Ansible-Vault to share a password
   vars:
-    login: &login
+    input: &login
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ password }}"
       https: true
       validate_certs: false
-    file: password.yml
+    passKey: password.yml
   vars_files:
-  - "{{ file }}"
+    - "{{ passKey }}"
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
+#  vars_prompt:
+#    - name: "netapp_password"
+#      prompt: "Enter NetApp Admin Password"
+#      private: yes
   tasks:
+
+# Using Ansible-Vault to share a password
+
+# Run using the ask-vault-pass switch:
+# ansible-playbook 5_sour_secretvol.yml --ask-vault-pass --extra-var "@source95_vars.yml"
+# vault-pass = letmein (decrypt key)
 
   - name: Create volume
     na_ontap_volume:
@@ -21,7 +33,7 @@
       aggregate_name: "{{ svm_aggregate }}"
       size: "{{ secret_size }}"
       size_unit: "{{ secret_units }}"
-      policy: "{{ export_policy_name }}"
+      policy: "{{ svm_export_policy_name }}"
       junction_path: "/{{ secret_vol }}"
       space_guarantee: "none"
       vserver: "{{ svm }}"

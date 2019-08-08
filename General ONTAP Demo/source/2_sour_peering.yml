@@ -28,6 +28,9 @@
       passphrase: "{{ passphrase }}"
       dest_hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+
+# Peer SVM
+
   - name: Source vserver peer create
     na_ontap_vserver_peer:
       state: "{{ state }}"

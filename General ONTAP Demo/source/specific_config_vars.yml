@@ -23,6 +23,7 @@ state: present
 
 # SVM Varibles
 svm: source
+
 #svm_aggregate: aggr1
 svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
 svm_aggr_list:
@@ -110,8 +111,8 @@ vol0_list:
 passphrase: seespotrun
 
 peer_vserver: destination
-peer_cluster: dest96
-peer_dest_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
+peer_cluster: dest95
+peer_dest_aggregate: "{{ peer_cluster }}{{ nodename }}01a_aggr1"
 
 source_intercluster_lif: 172.30.16.212
 dest_intercluster_lif: 172.30.16.217
@@ -119,6 +120,10 @@ dest_netapp_hostname: 172.30.16.215
 
 vol_sm_type: dp
 vol_type: dp
+
+#dest_vol_name: svm_sm_test
+dest_vol_size: 1
+dest_vol_size_units: gb
 
 ###
 # Ansible-Vault testing varibles
