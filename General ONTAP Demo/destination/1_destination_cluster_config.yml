@@ -34,10 +34,6 @@
 # Standard Cluster configuration section
 ###
 
-###
-# Standard Cluster configuration section
-###
-
   # Standardize naming and set common settings for root aggr/vol, and node names
 
   # Standardize root volumes based on naming standards
