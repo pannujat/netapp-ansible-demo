@@ -10,7 +10,7 @@
       https: true
       validate_certs: false
   vars_files:
-    - dest96_vars.yml
+    - test_vars.yml
   vars_prompt:
     - name: "netapp_password"
       prompt: "Enter NetApp Admin Password"

@@ -1,0 +1,33 @@
+cluster:
+
+netapp_hostname:
+netapp_username:
+# Leave commented out for vars_promtp to work
+#netapp_password:
+
+# Invoke Autosupport
+asup_invoke: "system node autosupport invoke -node * -type all"
+
+# Verification Commands
+date_verificaiton: "set -privilege diagnostic -confirmation off;date"
+asup_verification: "set -privilege diagnostic -confirmation off;autosupport show"
+
+verification_command_list:
+  - "set -privilege diagnostic -confirmation off;cluster show"
+  - "set -privilege diagnostic -confirmation off;system license show"
+  - "set -privilege diagnostic -confirmation off;version -fields version-verbose"
+  - "set -privilege diagnostic -confirmation off;vserver show"
+  - "set -privilege diagnostic -confirmation off;network interface show"
+  - "set -privilege diagnostic -confirmation off;vserver services dns show"
+  - "set -privilege diagnostic -confirmation off;node show"
+  - "set -privilege diagnostic -confirmation off;network interface show -vserver *"
+  - "set -privilege diagnostic -confirmation off;broadcast-domain show"
+  - "set -privilege diagnostic -confirmation off;cluster ha show"
+  - "set -privilege diagnostic -confirmation off;network options switchless-cluster show"
+  - "set -privilege diagnostic -confirmation off;cluster time-service ntp server show"
+  - "set -privilege diagnostic -confirmation off;system service-processor show"
+  - "set -privilege diagnostic -confirmation off;system service-processor network show"
+  - "set -privilege diagnostic -confirmation off;storage aggregate show"
+  - "set -privilege diagnostic -confirmation off;system node autosupport show"
+  - "set -privilege diagnostic -confirmation off;disk show"
+  - "set -privilege diagnostic -confirmation off;cluster ring show"

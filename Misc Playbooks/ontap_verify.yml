@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  gather_facts: no
+  name: ONTAP Verification
+  vars:
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+    - verification_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
+
+  tasks:
+
+  # Invole Autosupport
+  - name: Invoke Autosupport
+    na_ontap_command:
+      command: "{{ asup_invoke }}"
+      <<: *login
+
+  # Verification Commands for CLI output
+
+  # Verify NTP and Timezone Configuration
+
+  - name: verfiy NTP and Date Configuration
+    register: command_output
+    na_ontap_command:
+      command: "{{ date_verificaiton }}"
+      <<: *login
+  - debug:
+      var: command_output
+
+  # Verify Autosupport Configuration
+
+  - name: Verify Autosupport Configuration
+    register: command_output
+    na_ontap_command:
+      command: "{{ asup_verification }}"
+      <<: *login
+  - debug:
+      var: command_output
+
+  - name: verfication command list
+    register: command_output
+    na_ontap_command:
+      command: "{{ item }}"
+      <<: *login
+    with_items: "{{ verification_command_list }}"
+  - debug:
+      var: command_output
