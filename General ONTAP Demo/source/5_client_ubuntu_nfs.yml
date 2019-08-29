@@ -6,7 +6,7 @@
   vars:
     username: "ken"
 #    volume_name: "svm_test"
-    state: present
+#    state: absent
   vars_files:
     - standard_platform_vars.yml
     - specific_config_vars.yml
@@ -17,6 +17,11 @@
 
 #  - name: Ensure NFS sommon is installed
 #    apt: name=nfs-common state=present update_cache=yes
+
+  - name: Update repositories cache and install "nfs-common" package
+    apt:
+      name: nfs-common
+      update_cache: yes
 
   - name: Update fstab file with PROD
     lineinfile:

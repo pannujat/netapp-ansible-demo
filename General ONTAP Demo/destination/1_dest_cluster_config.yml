@@ -1,0 +1,127 @@
+---
+- hosts: localhost
+  gather_facts: no
+  name: Destination Cluster Config
+  vars:
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
+  tasks:
+
+# ROLE: na_ontap_config_cluster
+
+  - name: Get Ontapi version
+    na_ontap_gather_facts:
+      state: info
+      <<: *login
+      ontapi: 32
+  - import_role:
+      name: na_ontap_cluster_config
+    vars:
+      <<: *login
+
+###
+# Standard Cluster configuration section
+###
+
+###
+# Standard Cluster configuration section
+###
+
+  # Standardize naming and set common settings for root aggr/vol, and node names
+
+  # Standardize root volumes based on naming standards
+
+  - name: rename root volumes
+    na_ontap_volume:
+      state: present
+      from_name: "{{ item.name }}"
+      name: "{{ item.rename }}"
+      percent_snapshot_space: 0
+      vserver: "{{ item.vserver }}"
+      <<: *login
+    with_items: "{{ vol0_list }}"
+
+  # Standardize root aggergate based on naming standards
+
+  - name: rename root aggregates
+    na_ontap_aggregate:
+      state: present
+      service_state: online
+      from_name: "{{ item.name }}"
+      name: "{{ item.rename }}"
+      <<: *login
+    with_items: "{{ aggr_list }}"
+
+  # Standardize node naming based on naming standards
+
+#  - name: rename node
+#    na_ontap_node:
+#       from_name: "{{ item.from_name }}"
+#       name: "{{ item.name }}"
+#       <<: *login
+#    with_list: "{{ node_names }}"
+
+###
+# Standard SVM configuration section
+###
+
+# ROLE: na_ontap_vserver_config
+
+  - name: Get Ontapi version
+    na_ontap_gather_facts:
+      state: info
+      <<: *login
+      ontapi: 32
+  - import_role:
+      name: na_ontap_vserver_create
+    vars:
+      <<: *login
+
+# non-ROLE: Update default NFS Server configuration
+
+#  - name: Manage NFS
+#    na_ontap_nfs:
+#      state: "{{ state }}"
+#      service_state: started
+#      vserver: "{{ SVM }}"
+#      nfsv3: enabled
+#      nfsv4: disabled
+#      nfsv41: disabled
+#      tcp: enabled
+#      udp: disabled
+#      vstorage_state: disabled
+#      <<: *login
+
+# Managing Export-policies
+
+  - name: Create SVM Export-policy
+    na_ontap_export_policy:
+      state: "{{ state }}"
+      name: "{{ svm_export_policy_name }}"
+      vserver: "{{ svm }}"
+      <<: *login
+
+  - name: Setup "Default" and SVM Export-policies
+    na_ontap_export_policy_rule:
+      state: "{{ state }}"
+      policy_name: "{{ item.name }}"
+      vserver: "{{ svm }}"
+  #    client_match: 0.0.0.0/0,1.1.1.0/24
+      client_match: "{{ item.client_match }}"
+      ro_rule: "{{ item.ro_rule }}"
+      rw_rule: "{{ item.rw_rule }}"
+      rule_index: "{{ item.rule_index }}"
+      super_user_security: "{{ item.super_user_security }}"
+      <<: *login
+    with_items: "{{ export_policy_rules_list }}"

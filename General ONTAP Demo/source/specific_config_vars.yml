@@ -34,8 +34,8 @@ motd_mess: |
 
 # DNS Settings - Set to overide Standard config
 dns_domain: example.local
-#dns_servers: "172.30.16.2,8.8.8.8"
-dns_servers: "172.30.16.2"
+dns_servers: "172.30.16.2,8.8.8.8"
+#dns_servers: "172.30.16.2"
 
 # NTP Server
 ntp_srvr: time.nist.gov
