@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  gather_facts: no
+  name: SnapMirror Role Config
+  vars:
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+    - standard_platform_vars.yml
+    - specific_config_vars.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
+  tasks:
+
+# ROLE: na_ontap_config_cluster
+
+  - name: Get Ontapi version
+    na_ontap_gather_facts:
+      state: info
+      <<: *login
+      ontapi: 32
+  - import_role:
+      name: na_ontap_snapmirror_create
+    vars:
+      <<: *login
