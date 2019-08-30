@@ -12,6 +12,7 @@
   vars_files:
     - standard_platform_vars.yml
     - specific_config_vars.yml
+    - snapmirror_role.yml
   vars_prompt:
     - name: "netapp_password"
       prompt: "Enter NetApp Admin Password"

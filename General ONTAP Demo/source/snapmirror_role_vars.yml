@@ -1,0 +1,12 @@
+src_ontap: 172.30.16.210 # IP or FQDN of the source ONTAP cluster
+src_name: source95 # Shortname of the source cluster
+src_lif: 172.30.16.212  # IP address of a source Intercluster LIF
+src_vserver: source # Name of source Vserver
+src_volume: svm_test_01 # Name of source FlexVol
+dst_ontap: 172.30.16.215 # IP or FQDN of the destination ONTAP cluster
+dst_name: dest95 # Shortname of the destination cluster
+dst_lif: 172.30.16.217 # IP address of a destination Intercluster LIF
+dst_aggr: dest95h01a_aggr1 # Aggregate to create destination FlexVol on
+dst_vserver: destination # Name of destination Vserver
+#username: # Admin username of both clusters
+#password: # Password for Admin username
