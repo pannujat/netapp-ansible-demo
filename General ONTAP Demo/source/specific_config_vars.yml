@@ -97,7 +97,7 @@ svm_export_policy_name: data
 svm_vol_name: vol01
 
 svm_volume_list:
-  - { vol_name: "{{ svm_vol_name }}", vol_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: 1, vol_size_unit: 'gb', vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_vol_name }}", vol_space_gar: "none", vol_percent_snapshot_space: '0' }
+  - { vol_name: "{{ svm_vol_name }}", vol_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1", vol_size: "1", vol_size_unit: "gb", vol_policy: "{{ svm_export_policy_name }}", vol_junc: "/{{ svm_vol_name }}", vol_space_gar: "none", vol_percent_snapshot_space: "0" }
 
 # Export-Policy Management
 export_policy_rules_list:
