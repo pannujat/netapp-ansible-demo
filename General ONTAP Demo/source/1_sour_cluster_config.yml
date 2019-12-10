@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  collections:
+    - netapp.ontap
   gather_facts: no
   name: Source Cluster Config
   vars:

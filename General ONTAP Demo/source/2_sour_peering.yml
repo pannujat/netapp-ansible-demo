@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  collections:
+    - netapp.ontap
   gather_facts: no
   name: Peering Configuration - Cluster and SVM
   vars:

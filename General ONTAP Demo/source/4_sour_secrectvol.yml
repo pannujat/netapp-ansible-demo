@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  collections:
+    - netapp.ontap
   gather_facts: no
   name: Using Ansible-Vault to share a password
   vars:

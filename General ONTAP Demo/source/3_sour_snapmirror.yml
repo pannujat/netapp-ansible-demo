@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  collections:
+    - netapp.ontap
   gather_facts: no
   name: SnapMirror Configuration
   vars:
