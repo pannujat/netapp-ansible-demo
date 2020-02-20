@@ -1,0 +1,17 @@
+---
+- hosts: hostname
+  gather_facts: no
+  vars:
+      project_name: "SAMPLE_PROJECT"
+
+- name: REST POST Example
+  uri:
+    url: "{{ webapp_url }}/api/orgs"
+    method: POST
+    return_content: yes
+    body: "{ \"name\": \"{{ project_name }}\" }"
+    body_format: json
+    validate_certs: no
+    user: "{{ user }}"
+    password: "{{ password }}"
+    force_basic_auth: yes
