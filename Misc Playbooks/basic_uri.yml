@@ -1,17 +1,27 @@
 ---
-- hosts: hostname
-  gather_facts: no
+- hosts: localhost
+  name: AIQUM GET Clusters
   vars:
-      project_name: "SAMPLE_PROJECT"
+    input: &input
+      user: "{{ aiqum_username }}"
+      password: "{{ aiqum_password }}"
+      force_basic_auth: yes
+      validate_certs: false
+vars_files:
+- vars/aiqum.yml
 
-- name: REST POST Example
+tasks:
+
+- name: AIQUM GET Clusters
   uri:
-    url: "{{ webapp_url }}/api/orgs"
-    method: POST
+    url: "{{ api_base_url }}/datacenter/cluster/clusters"
+    method: GET
     return_content: yes
-    body: "{ \"name\": \"{{ project_name }}\" }"
-    body_format: json
-    validate_certs: no
-    user: "{{ user }}"
-    password: "{{ password }}"
-    force_basic_auth: yes
+    headers:
+      accept: application/json
+    <<: *login
+register: json_response
+
+- name: dump register
+  debug:
+    msg: "{{ json_response.json }}"
