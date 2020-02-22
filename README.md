@@ -14,6 +14,13 @@ General ONTAP Demo - Is a 2 node configuration workflow, with a source and desti
 Requirements:
 - destination system (vsim)
 - source system (vsim)
+- install netapp.ontap collection
+
+ansible-galaxy collection install netapp.ontap (-p /usr/share/ansible/collections)
+
+- Install the NetApp libraries:
+--netapp-lib
+--solidfire-sdk-python
 
 Note: Any ONTAP 9.3+ based system could be used with some adaptation: SimulateONTAP (vsim), ONTAP Select, etc.
 
@@ -23,4 +30,9 @@ Key Elements:
 - Manages export-policies
 - Basic non-Role SnapMirror setup
 
-Updated playbooks for ansible 2.9 and collections.
+Revision Summary:
+- Updated playbooks for ansible 2.9 and collections
+- Updated playbook organization:
+-- Variables only in "standard"
+-- Specifics with IPs in "specific"
+- 'destination' no longer renames, only source - This is to illustrate the possible

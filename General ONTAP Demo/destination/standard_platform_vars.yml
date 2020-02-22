@@ -51,7 +51,7 @@ bcasts:  # Create Broadcast domains
   - { name: MGMT, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0d' }
 
 inters:  # Create intercluster lifs for SnapMirror.
-  - { name: intercluster_1, address: 172.30.16.217, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+  - { name: "interclus_{{ cluster }}-01", address: "{{ inters_lif1 }}", netmask: "{{ inters_lif1_mask }}", node: "{{ cluster }}-01", port: e0c }
 
 ###
 # vserver_create role
@@ -84,7 +84,8 @@ timezone: "set -privilege diagnostic -confirmation off;timezone -timezone {{ tim
 # asup_nodename: *
 asup_transport: smtp
 asup_noteto: admin@example.com
-asup_mailhosts: 172.30.16.125
+asup_mailhosts: "{{ asup_mailhost_ips }}"
+#asup_mailhosts: 192.168.7.125
 asup_to_addresses: netapp_admin@example.com
 
 # Autosupport - Set FROM: fields
@@ -98,21 +99,50 @@ cdp: "run -node * options cdpd.enable on"
 lldp: "run -node * options lldp.enable on"
 
 ###
-# LDAP
+# Renaming section
 ###
+
+# This renames: nodenames, root aggregates, and root volumes.
+# This isn't required. However, naming conventiones may require it.
+# Here is how it can be accomplished:
+
+# Rename node section - Ex: cluster-01 to clusterh01a
+#nodename: h
+#node_names:
+#  - { from_name: "{{ cluster }}-01", name: "{{ cluster }}{{ nodename }}01a" }
+#  - { from_name: "{{ cluster }}-02", name: "{{ cluster }}{{ nodename }}01b" }
+#  - { from_name: "{{ cluster }}-03", name: "{{ cluster }}{{ nodename }}02a" }
+#  - { from_name: "{{ cluster }}-04", name: "{{ cluster }}{{ nodename }}02b" }
+
+# Rename root aggregate section - Ex: aggr0_cluster_01 to clusterh01a_aggr0
+#aggr_list:
+#  - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
+#  - { name: "aggr0_{{ cluster }}_02", rename: "{{ cluster }}{{ nodename }}01b_aggr0" }
+#  - { name: "aggr0_{{ cluster }}_03", rename: "{{ cluster }}{{ nodename }}02a_aggr0" }
+#  - { name: "aggr0_{{ cluster }}_04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
+
+# Rename root volume section - Ex: cluster_02_vol0 to clusterh01a_root
+#vol0_list:
+#  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
+#  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
+#  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
+#  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }
+
 
 ###
 # SVM LDAP Configuration Varibles
+###
+
 # These are varibles for the commands below
 svm_ldap_configname: lab
-svm_ldap_server: 172.30.16.226
+svm_ldap_server: "{{ svm_ldap_server_ips }}"
+#svm_ldap_server: 192.168.7.125
 
 # These are standard container information
 svm_ldap_base_dn: "dc=lab,ou=bu,o=company"
 svm_ldap_user_dn: "cn=users,dc=lab,ou=bu,o=company"
 svm_ldap_group_dn: "cn=groups,dc=lab,ou=bu,o=company"
 svm_ldap_netgroup_dn: "cn=netgroup,dc=lab,ou=bu,o=company"
-
 
 # LDAP SVM Client-Config
 svm_ldap: "vserver services name-service ldap client create -client-config {{ svm_ldap_configname }} -servers {{ svm_ldap_server }} -schema RFC-2307 -port 389 -query-timeout 3 -min-bind-level anonymous -base-dn {{ svm_ldap_base_dn }} -user-dn {{ svm_ldap_user_dn }} -group-dn {{ svm_ldap_group_dn }} -netgroup-dn {{ svm_ldap_netgroup_dn }}  -base-scope subtree -use-start-tls false -session-security none -vserver {{ svm }}"
@@ -125,7 +155,10 @@ svm_nss_list:
   -  "vserver services name-service ns-switch modify -vserver {{ svm }} -database netgroup -sources $nsNetgroupSource"
 
 
-  # User and Role Configuration Varibles
+###
+# User and Role Configuration Varibles
+###
+
 role_cmds:
   - { name: 'netapp_harvest', cmddir: 'version', level: 'readonly', svm: '"{{ cluster }}"' }
   - { name: 'netapp_harvest', cmddir: 'cluster identity show', level: 'readonly', svm: '"{{ cluster }}"' }
