@@ -1,6 +1,6 @@
-cluster: source95
+cluster: sour97
 
-netapp_hostname: 172.30.16.210
+netapp_hostname: 192.168.7.210
 netapp_username: admin
 # Leave commented out for vars_promtp to work
 #netapp_password:
@@ -16,12 +16,13 @@ state: present
 # cluster_mgmt and node_mgmt LIFs will normally be configured during install
 # broadcast-domain split on the "MGMT" interfaces to push them from default to MGMT
 
-
+###
 # ROLE Varibles
+###
+
+# Cluster setup - Role varibles
 
 license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA,SOHOURRRYVHXCFABGAAAAAAAAAAA,KQSRRRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,GUJZTRRRYVHXCFABGAAAAAAAAAAA,OSYVWRRRYVHXCFABGAAAAAAAAAAA,UZLKTRRRYVHXCFABGAAAAAAAAAAA,EJFDVRRRYVHXCFABGAAAAAAAAAAA
-
-# Role varibles
 
 motd_mess: |
   ****************************************************************************
@@ -34,45 +35,31 @@ motd_mess: |
 
 # DNS Settings - Set to overide Standard config
 dns_domain: example.local
-dns_servers: "172.30.16.2,8.8.8.8"
-#dns_servers: "172.30.16.2"
+dns_servers: "192.168.7.1,8.8.8.8"
+#dns_servers: "192.168.7.2"     # Helps remove network dependancy
 
 # NTP Server
 ntp_srvr: time.nist.gov
+#ntp_srvr: pool.ntp.org
 
 # Networking Varibles
 #ifgrp_ports: "[e0e, e0f]"
 ifgrp_ports: "e0e,e0f"
 vlan_id: 201
 
+# Configuring Intercluster LIFs for SnapMirror, Cloud Tier, etc.
+inters_lif1: 192.168.7.212
+inters_lif1_mask: 255.255.255.0
+#inters_lif2: 192.168.7.213
+#inters_lif2_mask: 255.255.255.0
+
 # Standard Configuration varibles
 
-###
-# Renaming section
-###
+# Autosupport Configuration
+asup_mailhost_ips: 192.168.7.125
 
-# Rename node section - Ex: cluster-01 to clusterh01a
-nodename: h
-node_names:
-  - { from_name: "{{ cluster }}-01", name: "{{ cluster }}{{ nodename }}01a" }
-#  - { from_name: "{{ cluster }}-02", name: "{{ cluster }}{{ nodename }}01b" }
-#  - { from_name: "{{ cluster }}-03", name: "{{ cluster }}{{ nodename }}02a" }
-#  - { from_name: "{{ cluster }}-04", name: "{{ cluster }}{{ nodename }}02b" }
-
-# Rename root aggregate section
-aggr_list:
-  - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
-
-
-# Rename root volume section
-vol0_list:
-  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
-#  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
-#  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
-#  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }
+# LDAP Configuration
+svm_ldap_server_ips: 192.168.7.125
 
 ###
 # SVM Standard Configuration Varibles
@@ -81,19 +68,20 @@ vol0_list:
 # SVM Varibles
 svm: source
 
-#svm_aggregate: aggr1
 svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
 svm_aggr_list:
 svm_port: e0c
-svm_address: 172.30.16.213
-svm_netmask: 255.255.0.0
-svm_gateway: 172.30.16.2
+svm_address: 192.168.7.213
+svm_netmask: 255.255.255.0
+svm_gateway: 192.168.7.2
 
 svm_dns_domain: "{{ dns_domain }}"
-svm_dns_servers: "{{ dns_servers }}"
+svm_dns_servers: "{{ dns_servers }}"    # BUG: Can't use the cluster DNS servers
 
 svm_root_vol_security: unix
 svm_export_policy_name: data
+
+#
 svm_vol_name: vol01
 
 svm_volume_list:
@@ -101,8 +89,9 @@ svm_volume_list:
 
 # Export-Policy Management
 export_policy_rules_list:
-  - { name: 'default', client_match: '172.30.16.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
-  - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+  - { name: 'default', client_match: '192.168.7.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
+  - { name: 'default', client_match: '192.168.7.0/24', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+  - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '4', super_user_security: 'none' }
   - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
 
 ###
@@ -112,12 +101,12 @@ export_policy_rules_list:
 passphrase: seespotrun
 
 peer_vserver: destination
-peer_cluster: dest95
+peer_cluster: dest97
 peer_dest_aggregate: "{{ peer_cluster }}{{ nodename }}01a_aggr1"
 
-source_intercluster_lif: 172.30.16.212
-dest_intercluster_lif: 172.30.16.217
-dest_netapp_hostname: 172.30.16.215
+source_intercluster_lif: "{{ inters_lif1 }}"
+dest_intercluster_lif: 192.168.7.217
+dest_netapp_hostname: 192.168.7.215
 
 vol_sm_type: dp
 vol_type: dp

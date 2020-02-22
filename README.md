@@ -23,4 +23,9 @@ Key Elements:
 - Manages export-policies
 - Basic non-Role SnapMirror setup
 
-Updated playbooks for ansible 2.9 and collections.
+Revision Summary:
+- Updated playbooks for ansible 2.9 and collections
+- Updated playbook organization:
+-- Variables only in "standard"
+-- Specifics with IPs in "specific"
+- 'destination' no longer renames, only source - This is to illustrate the possible

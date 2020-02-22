@@ -1,6 +1,6 @@
-cluster: dest95
+cluster: dest97
 
-netapp_hostname: 172.30.16.215
+netapp_hostname: 192.168.7.215
 netapp_username: admin
 # Leave commented out for vars_promtp to work
 #netapp_password:
@@ -16,45 +16,13 @@ state: present
 # cluster_mgmt and node_mgmt LIFs will normally be configured during install
 # broadcast-domain split on the "MGMT" interfaces to push them from default to MGMT
 
-
 ###
-# SVM Standard Configuration Varibles
+# ROLE Varibles
 ###
 
-# SVM Varibles
-svm: destination
-#svm_aggregate: aggr1
-svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
-svm_aggr_list:
-svm_port: e0c
-svm_address: 172.30.16.218
-svm_netmask: 255.255.0.0
-svm_gateway: 172.30.16.2
-
-svm_dns_domain: "{{ dns_domain }}"
-svm_dns_servers: "{{ dns_servers }}"
-
-svm_root_vol_security: unix
-svm_export_policy_name: data
-
-# Export-Policy Management
-export_policy_rules_list:
-  - { name: 'default', client_match: '172.30.16.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
-  - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
-  - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
-
-# ansible-vault testing varibles
-
-svm_volume_name: svm_test
-secret_vol: secret_vol
-size: 1
-units: gb
-vol_type: dp
+# Cluster setup - Role varibles
 
 license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA,SOHOURRRYVHXCFABGAAAAAAAAAAA,KQSRRRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,GUJZTRRRYVHXCFABGAAAAAAAAAAA,OSYVWRRRYVHXCFABGAAAAAAAAAAA,UZLKTRRRYVHXCFABGAAAAAAAAAAA,EJFDVRRRYVHXCFABGAAAAAAAAAAA
-
-
-# Role varibles
 
 motd_mess: |
   ****************************************************************************
@@ -67,41 +35,75 @@ motd_mess: |
 
 # DNS Settings - Set to overide Standard config
 dns_domain: example.local
-dns_servers: "172.30.16.2,8.8.8.8"
+dns_servers: "192.168.7.2,8.8.8.8"
+#dns_servers: "192.168.7.2"     # Helps remove network dependancy
 
 # NTP Server
 ntp_srvr: time.nist.gov
+#ntp_srvr: pool.ntp.org
 
 # Networking Varibles
 #ifgrp_ports: "[e0e, e0f]"
 ifgrp_ports: "e0e,e0f"
 vlan_id: 201
 
+# Configuring Intercluster LIFs for SnapMirror, Cloud Tier, etc.
+inters_lif1: 192.168.7.212
+inters_lif1_mask: 255.255.255.0
+#inters_lif2: 192.168.7.213
+#inters_lif2_mask: 255.255.255.0
+
 # Standard Configuration varibles
 
+# Autosupport Configuration
+asup_mailhost_ips: 192.168.7.125
+
+# LDAP Configuration
+svm_ldap_server_ips: 192.168.7.125
+
+
 ###
-# Renaming section
+# SVM Standard Configuration Varibles
 ###
 
-# Rename node section - Ex: cluster-01 to clusterh01a
-nodename: h
-node_names:
-  - { from_name: "{{ cluster }}-01", name: "{{ cluster }}{{ nodename }}01a" }
-#  - { from_name: "{{ cluster }}-02", name: "{{ cluster }}{{ nodename }}01b" }
-#  - { from_name: "{{ cluster }}-03", name: "{{ cluster }}{{ nodename }}02a" }
-#  - { from_name: "{{ cluster }}-04", name: "{{ cluster }}{{ nodename }}02b" }
+# SVM Varibles
+svm: destination
 
-# Rename root aggregate section
-aggr_list:
-  - { name: 'aggr0_{{ cluster }}_01', rename: "{{ cluster }}{{ nodename }}01a_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-02", rename: "{{ cluster }}{{ nodename }}01b_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-03", rename: "{{ cluster }}{{ nodename }}02a_aggr0" }
-  #  - { name: "aggr0_{{ cluster }}-04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
+svm_aggregate: "{{ cluster }}_01_aggr1"
+#svm_aggregate: "{{ cluster }}{{ nodename }}01a_aggr1"
+svm_aggr_list:
+svm_port: e0c
+svm_address: 192.168.7.218
+svm_netmask: 255.255.255.0
+svm_gateway: 192.168.7.2
 
+svm_dns_domain: "{{ dns_domain }}"
+svm_dns_servers: "{{ dns_servers }}"    # BUG: Can't use the cluster DNS servers
 
-# Rename root volume section
-vol0_list:
-  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
-#  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
-#  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
-#  - { name: "{{ cluster }}_04_vol0", rename: "{{ cluster }}{{ nodename }}02b_root" }
+svm_root_vol_security: unix
+svm_export_policy_name: data
+
+# Export-Policy Management
+export_policy_rules_list:
+  - { name: 'default', client_match: '192.168.7.130', ro_rule: 'any', rw_rule: 'any', rule_index: '2', super_user_security: 'any' }
+  - { name: 'default', client_match: '192.168.7.0/24', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+  - { name: 'default', client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'none', rule_index: '3', super_user_security: 'none' }
+  - { name: "{{ svm_export_policy_name }}", client_match: '0.0.0.0/0', ro_rule: 'any', rw_rule: 'any', rule_index: '1', super_user_security: 'any' }
+
+###
+# SnapMirror Configuration section
+###
+
+###
+# Ansible-Vault testing varibles
+###
+
+# ansible-vault testing varibles
+
+svm_volume_name: svm_test
+secret_vol: secret_vol
+size: 1
+units: gb
+vol_type: dp
+
+# Standard Configuration varibles
