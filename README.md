@@ -1,4 +1,4 @@
-# Ansible-Demo
+# NetApp Ansible Demo
  General NetApp Ansible integration demonstration
 
 # This repo is for sharing a standardizing set of Ansible demo files
