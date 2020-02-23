@@ -30,7 +30,7 @@ snmp:	# Setup or modify an SNMP community
   - { community_name: public, access_control: ro }
 
 aggrs:	# Create one or more Aggregates.
-  - { name: "{{ cluster }}{{ nodename }}01a_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+  - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
 
 ports:  # Set MTU for ports.
   - { node: "{{ cluster }}-01", port: e0a, mtu: 1500, flowcontrol: none }
@@ -122,7 +122,8 @@ lldp: "run -node * options lldp.enable on"
 #  - { name: "aggr0_{{ cluster }}_04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
 
 # Rename root volume section - Ex: cluster_02_vol0 to clusterh01a_root
-#vol0_list:
+vol0_list:
+  - { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}" }
 #  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
 #  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
 #  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }

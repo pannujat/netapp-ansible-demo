@@ -35,8 +35,8 @@ motd_mess: |
 
 # DNS Settings - Set to overide Standard config
 dns_domain: example.local
-dns_servers: "192.168.7.2,8.8.8.8"
-#dns_servers: "192.168.7.2"     # Helps remove network dependancy
+#dns_servers: "192.168.7.1,8.8.8.8"
+dns_servers: "192.168.7.1"     # Helps remove network dependancy
 
 # NTP Server
 ntp_srvr: time.nist.gov
@@ -75,7 +75,7 @@ svm_aggr_list:
 svm_port: e0c
 svm_address: 192.168.7.218
 svm_netmask: 255.255.255.0
-svm_gateway: 192.168.7.2
+svm_gateway: 192.168.7.1
 
 svm_dns_domain: "{{ dns_domain }}"
 svm_dns_servers: "{{ dns_servers }}"    # BUG: Can't use the cluster DNS servers

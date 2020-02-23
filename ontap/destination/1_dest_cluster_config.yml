@@ -37,12 +37,17 @@
 ###
 
 ###
-# Standard Cluster configuration section
+# Renaming section
 ###
 
-  # Standardize naming and set common settings for root aggr/vol, and node names
+# This renames: nodenames, root aggregates, and root volumes.
+# This isn't required. However, naming conventiones may require it.
+# Here is how it can be accomplished:
 
-  # Standardize root volumes based on naming standards
+
+# Rename root volume section - Ex: cluster_02_vol0 to cluster_02_root
+# This can be useful as the first node in the cluster
+# can have a different naming scheme
 
   - name: rename root volumes
     na_ontap_volume:
@@ -54,18 +59,18 @@
       <<: *login
     with_items: "{{ vol0_list }}"
 
-  # Standardize root aggergate based on naming standards
+# Rename root aggregate section - Ex: aggr0_cluster_01 to clusterh01a_aggr0
 
-  - name: rename root aggregates
-    na_ontap_aggregate:
-      state: present
-      service_state: online
-      from_name: "{{ item.name }}"
-      name: "{{ item.rename }}"
-      <<: *login
-    with_items: "{{ aggr_list }}"
+#  - name: rename root aggregates
+#    na_ontap_aggregate:
+#      state: present
+#      service_state: online
+#      from_name: "{{ item.name }}"
+#      name: "{{ item.rename }}"
+#      <<: *login
+#    with_items: "{{ aggr_list }}"
 
-  # Standardize node naming based on naming standards
+# Rename node section - Ex: cluster-01 to clusterh01a
 
 #  - name: rename node
 #    na_ontap_node:
