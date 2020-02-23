@@ -122,12 +122,8 @@ lldp: "run -node * options lldp.enable on"
 #  - { name: "aggr0_{{ cluster }}_04", rename: "{{ cluster }}{{ nodename }}02b_aggr0" }
 
 # Rename root volume section - Ex: cluster_02_vol0 to clusterh01a_root
-<<<<<<< HEAD:General ONTAP Demo/destination/standard_platform_vars.yml
-#vol0_list:
-=======
 vol0_list:
-  - { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}" }
->>>>>>> b631f6a6490c2e42e97049592c32dbde26558546:ontap/destination/standard_platform_vars.yml
+- { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}" }
 #  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
 #  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
 #  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
