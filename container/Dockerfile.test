@@ -1,0 +1,16 @@
+# Getting base image
+# Can use scratch if a empty image is desired
+# Using ubuntu here (Could replace with centos, or other distro)
+FROM ubuntu
+
+# Optional, but best practice
+MAINTAINER ken hillier <ken.hillier@gmail.com>
+
+# Command to run something within image during creation
+RUN apt update
+
+# Run on command line
+# #RUN is executed when you create an image
+# #CMD is run only when you create a container out of the image, later
+CMD ["echo", "Hello World...! from my first my first docker image"]
+
