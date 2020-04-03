@@ -22,9 +22,8 @@
 
   - name: Get Ontapi version
     na_ontap_info:
-    state: info
-    <<: *login
+      state: info
+      <<: *login
     register: netapp
-
   - debug:
       msg: "{{ netapp.ontap_info.cluster_node_info }}"
