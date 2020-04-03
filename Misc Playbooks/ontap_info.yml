@@ -2,7 +2,7 @@
 - hosts: localhost
   collections:
     - netapp.ontap
-  gather_facts: no
+#  gather_facts: no
   name: ONTAP Info
   vars:
     input: &login
@@ -11,13 +11,11 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-  vars_files:
-    - standard_platform_vars.yml
-    - specific_config_vars.yml
   vars_prompt:
     - name: "netapp_password"
       prompt: "Enter NetApp Admin Password"
       private: yes
+
   tasks:
 
   na_ontap_info:
