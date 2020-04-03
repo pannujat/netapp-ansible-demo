@@ -30,23 +30,23 @@
       msg: "{{ netapp.ontap_info.cluster_node_info }}"
 
 # Get NetApp Info (password auth)
-- name: Get Ontapi version
-  na_ontap_info:
-    state: info
-    <<: *login
-  register: ontap_info
-- debug:
-    msg: "{{ ontap_info.ontap_info }}"
+  - name: Get Ontapi version
+    na_ontap_info:
+      state: info
+      <<: *login
+      register: ontap_info
+  - debug:
+      msg: "{{ ontap_info.ontap_info }}"
 
 
 # Gathers all info EXCEPT volume an lun
-- name: Get Ontapi version
-  na_ontap_info:
-    state: info
-    <<: *login
-    gather_subset:
-     - "!volume_info"
-     - "!lun_info"
-  register: ontap_info
-- debug:
-    msg: "{{ ontap_info.ontap_info }}"
+  - name: Get Ontapi version
+    na_ontap_info:
+      state: info
+      <<: *login
+      gather_subset:
+        - "!volume_info"
+        - "!lun_info"
+    register: ontap_info
+  - debug:
+      msg: "{{ ontap_info.ontap_info }}"
