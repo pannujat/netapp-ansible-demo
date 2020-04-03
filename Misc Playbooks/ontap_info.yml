@@ -50,3 +50,12 @@
     register: ontap_info
   - debug:
       msg: "{{ ontap_info.ontap_info }}"
+
+# Check "netapp.ontap_info.ontap_version"
+  - name: Get Ontapi version
+    na_ontap_info:
+      state: info
+      <<: *login
+    register: ontap_info
+  - debug:
+      msg: "{{ ontap_info.ontap_version }}"
