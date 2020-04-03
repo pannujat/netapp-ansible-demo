@@ -1,4 +1,4 @@
-cluster: dest95
+cluster: dest97
 
 netapp_hostname: 172.30.16.215
 netapp_username: admin
@@ -40,8 +40,8 @@ dns_domain: example.local
 dns_servers: "172.30.16.2"     # Helps remove network dependancy
 
 # NTP Server
-ntp_srvr: time.nist.gov
-#ntp_srvr: pool.ntp.org
+#ntp_srvr: time.nist.gov
+ntp_srvr: pool.ntp.org
 
 # Networking Varibles
 #ifgrp_ports: "[e0e, e0f]"

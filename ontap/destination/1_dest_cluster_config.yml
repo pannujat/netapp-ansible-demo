@@ -56,6 +56,7 @@
       name: "{{ item.rename }}"
       percent_snapshot_space: 0
       vserver: "{{ item.vserver }}"
+      comment: "{{ item.comment }}"
       <<: *login
     with_items: "{{ vol0_list }}"
 
