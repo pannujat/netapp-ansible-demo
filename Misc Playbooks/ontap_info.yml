@@ -23,6 +23,6 @@
   na_ontap_info:
     state: info
     <<: *login
-  register: netapp
-debug:
-  msg: "{{ netapp.ontap_info.cluster_node_info }}"
+    register: netapp
+  debug:
+    msg: "{{ netapp.ontap_info.cluster_node_info }}"
