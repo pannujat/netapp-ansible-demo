@@ -34,7 +34,7 @@
     na_ontap_info:
       state: info
       <<: *login
-      register: ontap_info
+    register: ontap_info
   - debug:
       msg: "{{ ontap_info.ontap_info }}"
 
