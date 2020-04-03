@@ -22,7 +22,7 @@
 # ROLE: na_ontap_config_cluster
 
   - name: Get Ontapi version
-    na_ontap_gather_facts:
+    na_ontap_info:
       state: info
       <<: *login
       ontapi: 32
