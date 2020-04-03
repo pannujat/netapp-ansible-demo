@@ -22,5 +22,5 @@
     state: info
     <<: *login
     register: netapp
-  debug:
-    msg: "{{ netapp.ontap_info.cluster_node_info }}"
+  - debug:
+      msg: "{{ netapp.ontap_info.cluster_node_info }}"
