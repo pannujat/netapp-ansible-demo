@@ -48,7 +48,7 @@ ifgrp_ports: "e0e,e0f"
 vlan_id: 201
 
 # Configuring Intercluster LIFs for SnapMirror, Cloud Tier, etc.
-inters_lif1: 172.30.16.212
+inters_lif1: 172.30.16.217
 inters_lif1_mask: 255.255.255.0
 #inters_lif2: 172.30.16.213
 #inters_lif2_mask: 255.255.255.0
