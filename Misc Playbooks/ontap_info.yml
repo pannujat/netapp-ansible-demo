@@ -5,6 +5,8 @@
 #  gather_facts: no
   name: ONTAP Info
   vars:
+    netapp_hostname: 172.30.16.215
+    netapp_username: admin
     input: &login
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
@@ -23,6 +25,6 @@
     state: info
     <<: *login
     register: netapp
-    
+
   - debug:
       msg: "{{ netapp.ontap_info.cluster_node_info }}"
