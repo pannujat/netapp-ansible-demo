@@ -3,7 +3,7 @@
   collections:
     - netapp.ontap
 #  gather_facts: no
-  name: ONTAP Info
+  name: ONTAP.Info Module Tests
   vars:
     netapp_hostname: 172.30.16.215
     netapp_username: admin
@@ -21,7 +21,7 @@
   tasks:
 
 # Gathers Node information
-  - name: Get Ontapi version
+  - name: Get Node Information
     na_ontap_info:
       state: info
       <<: *login
