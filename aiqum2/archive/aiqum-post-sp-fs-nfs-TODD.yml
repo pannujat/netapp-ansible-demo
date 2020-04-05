@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  name: AIQUM POST Storage-Providers fileshares NFS
+  gather_facts: no
+  vars:
+    input: &login
+      url_username: "{{ aiqum_username }}"
+      url_password: "{{ aiqum_password }}"
+      validate_certs: false
+      force_basic_auth: yes
+  vars_files:
+  - vars/aiqum_vars.yml
+  tasks:
+
+  - name: AIQUM Get Storage-Providers fileshares NFS
+    uri:
+      method: POST
+      url: "{{ aiqum_endpoint_url }}/storage-provider/file-shares"
+      return_content: yes
+      body: 
+        name:      FileShare_todd02
+        performance_service_level:
+          key: c370e961-478d-11ea-9b21-d1c772e31eeb
+        space:
+          size: 1073741824
+        svm:
+          key: 52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449
+      body_format: json
+      force_basic_auth: yes
+      validate_certs:   false
+      url_username:     admin
+      url_password:     cpoc3593
+      headers:
+        Accept: application/json
+#        Content-Type: applicaiton/json
+      status_code:      202
+    register: json_response
+
+  - name: debug registered vars
+    debug:
+      msg: "{{ json_response.json }}"

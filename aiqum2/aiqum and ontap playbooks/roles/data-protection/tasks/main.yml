@@ -1,0 +1,55 @@
+---
+
+- name: 'validate required paramaters'
+  assert:
+    that:
+      - dp_create.credentials           is defined
+      - dp_create.src_cluster_ip        is defined
+      - dp_create.src_vserver           is defined
+      - dp_create.src_vol_name          is defined
+      - dp_create.peer_cluster_ip       is defined
+      - dp_create.peer_vserver          is defined
+      - dp_create.peer_vol_name         is defined
+  register:         ed_result
+  ignore_errors:    true
+
+- name: 'check validation result'
+  fail:
+    msg:  'ERROR: required parameters not defined or invalid'
+  when:
+    - ed_result.failed
+
+- name: 'provision DP volume'
+  na_ontap_volume:
+    hostname:       "{{ dp_create.peer_cluster_ip }}"
+    username:       "{{ dp_create.credentials.na.dst.user_name }}"
+    password:       "{{ dp_create.credentials.na.dst.user_pw }}"
+    https:          true
+    validate_certs: false
+
+    state:                'present'
+    aggregate_name:       'snapmirror_01_NVME_SSD_1'
+    size:                 1
+    size_unit:            'gb'
+    space_guarantee:      'none'
+    type:                 'DP'
+    vserver:              "{{ dp_create.peer_vserver }}"
+    name:                 "{{ dp_create.peer_vol_name }}"
+
+- name: 'provision a snapmirror'
+  na_ontap_snapmirror:
+    hostname:       "{{ dp_create.peer_cluster_ip }}"
+    username:       "{{ dp_create.credentials.na.dst.user_name }}"
+    password:       "{{ dp_create.credentials.na.dst.user_pw }}"
+    https:          true
+    validate_certs: false
+
+    state:                'present'
+    source_path:          "{{ dp_create.src_vserver }}:{{ dp_create.src_vol_name }}"
+    destination_path:     "{{ dp_create.peer_vserver }}:{{ dp_create.peer_vol_name }}"
+    policy:               'MirrorAllSnapshots'
+    schedule:             'hourly'
+    relationship_type:    'extended_data_protection'
+    use_rest:             'Always'
+  register:         ed_result
+    

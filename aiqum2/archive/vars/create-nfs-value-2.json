@@ -1,0 +1,16 @@
+{
+  "mountpoint": "/fileshare3",
+  "name": "fileshare3",
+  "performance_service_level": {
+    "key": "c370e961-478d-11ea-9b21-d1c772e31eeb"
+  },
+  "space": {
+    "size": 2147483648
+  },
+  "storage_efficiency_policy": {
+    "key": "c37204df-478d-11ea-9b21-d1c772e31eeb"
+  },
+  "svm": {
+    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+  }
+}

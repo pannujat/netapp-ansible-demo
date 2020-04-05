@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  name: AIQUM POST Storage-Providers fileshares NFS
+  vars:
+    input: &login
+      url_username: "{{ aiqum_username }}"
+      url_password: "{{ aiqum_password }}"
+      validate_certs: false
+      force_basic_auth: yes
+  vars_files:
+  - vars/aiqum_vars.yml
+  tasks:
+
+  - name: AIQUM Get Storage-Providers fileshares NFS
+    uri:
+      method: POST
+      url: "{{ aiqum_endpoint_url }}/storage-provider/file-shares"
+      return_content: yes
+      body: "{{ lookup('file','vars/create-nfs-value-llab.json') }}"
+      body_format: json
+      headers:
+        Accept: application/json
+#        Content-Type: applicaiton/json
+      <<: *login
+    register: json_response
+
+  - name: debug registered vars
+    debug:
+      msg: "{{ json_response.json }}"

@@ -1,0 +1,46 @@
+---
+
+-  name: 'provision export policy'
+   na_ontap_export_policy:
+      hostname:         "{{ nfs_prov.cluster_ip }}"
+      username:         "{{ nfs_prov.na.username }}"
+      password:         "{{ nfs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:          "{{ nfs_prov.vserver }}"
+      name:             "{{ nfs_prov.policy_name }}"
+
+
+-  name: 'provision export rules'
+   na_ontap_export_policy_rule:
+      hostname:         "{{ nfs_prov.cluster_ip }}"
+      username:         "{{ nfs_prov.na.username }}"
+      password:         "{{ nfs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:                "{{ nfs_prov.vserver }}"
+      client_match:           "{{ loop_rule.client_match }}"
+      protocol:               "{{ loop_rule.protocol }}"
+      ro_rule:                "{{ loop_rule.ro_rule }}"
+      rw_rule:                "{{ loop_rule.rw_rule }}"
+      super_user_security:    "{{ loop_rule.super_user_security }}"
+      policy_name:            "{{ nfs_prov.policy_name }}"
+   loop:    "{{ nfs_prov.rules }}"
+   loop_control:
+      loop_var:      loop_rule
+
+
+-  name: 'apply policy to volume'
+   na_ontap_volume:
+      hostname:         "{{ nfs_prov.cluster_ip }}"
+      username:         "{{ nfs_prov.na.username }}"
+      password:         "{{ nfs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:                "{{ nfs_prov.vserver }}"
+      name:                   "{{ nfs_prov.vol_name }}"
+      policy:                 "{{ nfs_prov.policy_name }}"
+   

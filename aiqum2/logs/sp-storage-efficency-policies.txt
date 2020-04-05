@@ -1,0 +1,63 @@
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [AIQUM GET Storage-Providers Storage Efficency Policies] ***************************************
+
+TASK [Gathering Facts] ******************************************************************************
+ok: [localhost]
+
+TASK [AIQUM GET Storage-Providers Storage Efficency Policies] ***************************************
+ok: [localhost]
+
+TASK [debug registered vars] ************************************************************************
+ok: [localhost] => {
+    "msg": {
+        "_links": {
+            "self": {
+                "href": "/api/storage-provider/storage-efficiency-policies?system_defined=true"
+            }
+        }, 
+        "num_records": 2, 
+        "records": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/storage-efficiency-policies/c3720783-478d-11ea-9b21-d1c772e31eeb"
+                    }
+                }, 
+                "compression": "inline", 
+                "create_time": "2020-02-04T15:34:38.000-05:00", 
+                "deduplication": "inline", 
+                "description": "Deduplication and Compression are performed inline as data is written", 
+                "key": "c3720783-478d-11ea-9b21-d1c772e31eeb", 
+                "name": "High", 
+                "space_thin_provisioned": true, 
+                "system_defined": true, 
+                "update_time": "2020-02-04T15:34:38.000-05:00", 
+                "workload_count": 4
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/storage-efficiency-policies/c37204df-478d-11ea-9b21-d1c772e31eeb"
+                    }
+                }, 
+                "compression": "background", 
+                "create_time": "2020-02-04T15:34:38.000-05:00", 
+                "deduplication": "background", 
+                "description": "Deduplication and Compression are run periodically in the background", 
+                "key": "c37204df-478d-11ea-9b21-d1c772e31eeb", 
+                "name": "Low", 
+                "space_thin_provisioned": true, 
+                "system_defined": true, 
+                "update_time": "2020-02-04T15:34:38.000-05:00", 
+                "workload_count": 1
+            }
+        ], 
+        "total_records": 2
+    }
+}
+
+PLAY RECAP ******************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

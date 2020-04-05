@@ -1,0 +1,30 @@
+{
+  "access_control": {
+    "acl": [
+      {
+        "permission": "read",
+        "user_or_group": "everyone"
+      }
+    ],
+    "export_policy": {
+      "key": "5037f7d8-4a44-11e9-8044-000c292880fe",
+      "name_tag": "default",
+        }
+      ]
+    }
+  },
+  "mountpoint": "/apifileshare1",
+  "name": "apiFileShare1",
+  "performance_service_level": {
+    "key": "c3300367-569a-11ea-a85c-000c294e26a3"
+  },
+  "space": {
+    "size": 1073741824
+  },
+  "storage_efficiency_policy": {
+    "key": "c330f56a-569a-11ea-a85c-000c294e26a3"
+  },
+  "svm": {
+    "key": "5037f7d8-4a44-11e9-8044-000c292880fe"
+  }
+}

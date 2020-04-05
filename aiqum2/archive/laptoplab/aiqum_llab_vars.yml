@@ -1,0 +1,18 @@
+aiqum_username: admin
+aiqum_password: netapp1234
+aiqum_endpoint_url: https://172.30.16.145/api
+
+# AIQUM varibles/keys from API GET
+stnd_nfs_export.key:       5037f7d8-4a44-11e9-8044-000c292880fe  # 'default'
+# 5037f7d8-4a44-11e9-8044-000c292880fe:type=export_policy,uuid=8589934593
+
+
+# Standard varibles from AIQUM for cluster1
+# svm.key format:  [cluster uuid]:type=[object type],uuid=[object uuid]
+svm_pri.key:               5037f7d8-4a44-11e9-8044-000c292880fe:type=vserver,uuid=7992b8bd-5692-11ea-9cce-000c292880fe  # SVM = source
+#svm_sec.key:               4294d3ee-49df-11ea-8a83-00a098f7e5da  # SVM = destination
+psl_extreme.key:           c330685e-569a-11ea-a85c-000c294e26a3   # cluster1 "'extreme' PSL"
+psl_performance.key:       c33034e1-569a-11ea-a85c-000c294e26a3   # cluster1 "'performance' PSL"
+psl_value.key:             c3300367-569a-11ea-a85c-000c294e26a3   # cluster1 "'value' PSL"
+storage_efficiency_policy_high.key:  c330f7bd-569a-11ea-a85c-000c294e26a3  # "High" efficency policy
+storage_efficiency_policy_low.key:   c330f56a-569a-11ea-a85c-000c294e26a3  # "low" efficency policy

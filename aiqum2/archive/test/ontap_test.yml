@@ -1,0 +1,37 @@
+
+---
+- hosts: localhost
+  collections:
+    - netapp.ontap
+  gather_facts: no
+  name: ONTAP Ansible test playbook
+  vars:
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+    - var/ontap_var.yml
+  vars_prompt:
+    - name: "netapp_password"
+      prompt: "Enter NetApp Admin Password"
+      private: yes
+  tasks:
+
+###
+# Using na_ontap_info
+###
+
+    na_ontap_info:
+      state: info
+#      hostname: "{{ hostname }}"
+#      username: "{{ username }}"
+#      password: "{{ password }}"
+#      https: "{{ https }}"
+#      validate_certs: "{{ validate_certs }}"
+      <<: *login
+    register: netapp
+  debug:
+    msg: "{{ netapp.ontap_info.cluster_node_info }}"

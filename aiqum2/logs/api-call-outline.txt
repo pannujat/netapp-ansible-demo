@@ -1,0 +1,141 @@
+
+To provision a CIFS Share:
+
+/storage-provider/file-shares
+- allows creation, updates, and viewing
+
+GET Example:
+
+{
+  "_links": {
+    "next": {
+      "href": "/api/resourcelink"
+    },
+    "self": {
+      "href": "/api/resourcelink"
+    }
+  },
+  "num_records": 0,
+  "records": [
+    {
+      "_links": {
+        "self": {
+          "href": "/api/resourcelink"
+        }
+      },
+      "assigned_performance_service_level": {
+        "expected_iops": 75,
+        "key": "5a474fb4-052f-11ea-b7d6-fa163ec5e1a5",
+        "name": "Value",
+        "peak_iops": 75
+      },
+      "assigned_storage_efficiency_policy": {
+        "key": "5a48b7f6-052f-11ea-b7d6-fa163ec5e1a5",
+        "name": "High"
+      },
+      "cluster": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "key": "cbd1757b-0580-11e8-bd9d-00a098d39a12:type=cluster,uuid=cbd1757b-0580-11e8-bd9d-00a098d39e12",
+        "name": "umeng-aff300-01-02",
+        "uuid": "cbd1757b-0580-11e8-bd9d-00a098d39e12"
+      },
+      "key": "cbd1757b-0580-11e8-bd9d-00a098d39e12:type=volume,uuid=e2e06009-398e-4f4a-b3b1-6a680293b0b6",
+      "name": "FileShare_307",
+      "recommended_performance_service_level": {
+        "expected_iops": 75,
+        "key": "3a474fb4-052f-11ea-b7d6-fa163ea5e1a5",
+        "name": "Performance",
+        "peak_iops": 100
+      },
+      "space": {
+        "size": 104857600
+      },
+      "svm": {
+        "_links": {
+          "self": {
+            "href": "/api/resourcelink"
+          }
+        },
+        "key": "cbd1757b-0580-11e8-bd9d-00a098d39e12:type=vserver,uuid=23f47259-f4d1-11e8-a848-00a098d390f2",
+        "name": "svm_cluster1_65aecd",
+        "uuid": "23f47259-f4d1-11e8-a848-00a098d390f2"
+      },
+      "uuid": "e2e06009-398e-4f4a-b3b1-6a680293b0b6"
+    }
+  ],
+  "total_records": 0
+}
+
+
+POST Example: 
+
+{
+  "access_control": {
+    "acl": [
+      {
+        "permission": "read",
+        "user_or_group": "everyone"
+      }
+    ],
+    "active_directory_mapping": {
+      "key": "3b648c1b-d965-03b7-20da-61b791a6263c"
+    },
+    "export_policy": {
+      "key": "b06466ed-7c28-11e9-a158-00a0989837e7:type=export_policy,uuid=17179869185",
+      "name_tag": "ExportPolicyNameTag",
+      "rules": [
+        {
+          "clients": [
+            {
+              "match": "0.0.0.0/0"
+            }
+          ],
+          "index": 0,
+          "protocols": [
+            "nfs3"
+          ],
+          "ro_rule": [
+            "any"
+          ],
+          "rw_rule": [
+            "any"
+          ]
+        }
+      ]
+    }
+  },
+  "aggregate": {
+    "key": "a9f4ddea-e395-11e9-b660-005056a71be9:type=aggregate,uuid=02ed6b19-052d-49e1-a588-eb0e215b0e8e"
+  },
+  "mountpoint": "/fieshare_mount_point",
+  "name": "FileShare1",
+  "performance_service_level": {
+    "key": "32454e73-06d3-11ea-b7d6-fe163ec4e1a5"
+  },
+  "space": {
+    "size": 1428754
+  },
+  "storage_efficiency_policy": {
+    "key": "32454e63-06d3-11ca-b7d6-fe163ea5e1a5"
+  },
+  "svm": {
+    "key": "a9f4ddea-e395-11e9-b660-005056a71be9:type=vserver,uuid=4e09768c-e406-11e9-b660-005056a71be9"
+  }
+}
+
+mandatory:
+name
+size
+performance_service_level.key
+svm.key
+
+optional:
+access_control
+mountpoint
+storage_efficency_policy_key
+
+To create a CIFS share, we need to get the above keys form:

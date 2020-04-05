@@ -1,0 +1,83 @@
+---
+- hosts: localhost
+  name: AIQUM Get Datacenter SVMs
+  gather_facts: no
+
+  tasks:
+    - include_vars:
+        file: aiqum_demo.yml
+
+    - include_role:
+        name: aiqum_vol_prov
+      vars:
+        aiqum_prov:
+          vserver_name:         "{{ vserver }}"
+          service_level_name:   "{{ service_level_name }}"
+          vol_name:             "{{ vol_name }}"
+          capacity:           "{{ capacity }}"
+
+    - include_role:
+        name: vol-security
+      vars:
+        vol_security:
+          cluster_ip:   "{{ cluster_ip }}"
+          vserver:      "{{ vserver }}"
+          credentials:
+            na:
+              user_name:   "{{ aiqum_username }}"
+              user_pw:     "{{ aiqum_password }}"
+          vol_name:       "{{ vol_name }}"
+          nas_protocol:   "{{ nas_protocol }}"
+          security_style: "{{ vol_security_style }}"
+
+    - include_role:
+        name: nfs_prov
+      vars:
+        nfs_prov:
+          vol_name:   "{{ vol_name }}"
+          na:
+            username:   "{{ aiqum_username }}"
+            password:   "{{ aiqum_password }}"
+          cluster_ip:   "{{ cluster_ip }}"
+          vserver:      "{{ vserver }}"
+          policy_name:  "{{ policy_name }}"
+          rules:        "{{ policy_rules }}"
+      when:
+        - (nas_protocol == 'nfs') or (nas_protocol == 'multi')
+
+    - include_role:
+        name: cifs_prov
+      vars:
+        cifs_prov:
+          na:
+            username:   "{{ aiqum_username }}"
+            password:   "{{ aiqum_password }}"
+          cluster_ip:   "{{ cluster_ip }}"
+          vserver:      "{{ vserver }}"
+          share_name:   "{{ vol_name }}"
+          path:         "/{{ vol_name }}"
+          RO:           "{{ RO }}"
+          RW:           "{{ RW }}"
+      when:
+        - (nas_protocol == 'cifs') or (nas_protocol == 'multi')
+
+    - include_role:
+        name: data-protection
+      vars:
+        dp_create:
+          credentials:
+            na:
+              src:
+                user_name:      admin
+                user_pw:        cpoc3593
+              dst:
+                user_name:      admin
+                user_pw:        cpoc3593
+          src_cluster_ip:       "{{ cluster_ip }}"
+          src_vserver:          "{{ vserver }}"
+          src_vol_name:         "{{ vol_name }}"
+          peer_cluster_ip:      "{{ peer_cluster_ip }}"
+          peer_vserver:         "{{ peer_vserver }}"
+          peer_vol_name:        "{{ vol_name }}"
+      when:
+        - data_protection

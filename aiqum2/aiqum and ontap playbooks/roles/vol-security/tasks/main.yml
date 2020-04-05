@@ -1,0 +1,51 @@
+---
+
+- name: 'validate required paramaters'
+  assert:
+    that:
+      - vol_security.credentials          is defined
+      - vol_security.cluster_ip           is defined
+      - vol_security.vserver              is defined
+      - vol_security.vol_name             is defined
+      - vol_security.security_style       is defined
+      - vol_security.nas_protocol         is defined
+  register:         ed_result
+  ignore_errors:    true
+
+- name: 'check validation result'
+  fail:
+    msg:  'ERROR: required parameters not defined or invalid'
+  when:
+    - ed_result.failed
+
+- name: 'set determine volume security style unix'
+  set_fact:
+    ed_vol_security:  'unix'
+  when:
+    - vol_security.nas_protocol   == 'nfs'
+
+- name: 'set determine volume security style ntfs'
+  set_fact:
+    ed_vol_security:  'ntfs'
+  when:
+    - vol_security.nas_protocol   == 'cifs'
+
+- name: 'set determine volume security style multi'
+  set_fact:
+    ed_vol_security:  "{{ vol_security.security_style }}"
+  when:
+    - vol_security.nas_protocol   == 'multi'
+
+- name: 'Set security style'
+  na_ontap_command:
+    hostname:       "{{ vol_security.cluster_ip }}"
+    username:       "{{ vol_security.credentials.na.user_name }}"
+    password:       "{{ vol_security.credentials.na.user_pw }}"
+    https:          true
+    validate_certs: false
+
+    command:        [ 'volume', 'modify',
+                      '-vserver', "{{ vol_security.vserver }}",
+                      '-volume',  "{{ vol_security.vol_name }}",
+                      '-security-style', "{{ ed_vol_security }}" ]
+

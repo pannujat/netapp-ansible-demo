@@ -1,0 +1,65 @@
+---
+- name: 'validate required inputs'
+  assert:
+    that:
+      - cifs_prov.cluster_ip           is defined
+      - cifs_prov.na.username          is defined
+      - cifs_prov.na.password          is defined
+      - cifs_prov.vserver              is defined
+      - cifs_prov.share_name           is defined
+      - cifs_prov.path                 is defined
+      - (cifs_prov.RO is defined) or (cifs_prov.RW is defined)
+
+  ignore_errors:    true
+  register:         ed_failed
+
+- name: 'fail on invalid parameters'
+  fail:
+    msg: 'ERROR: invalid parameters'
+  when:
+    - ed_failed.failed
+    
+-  name: 'provision cifs share'
+   na_ontap_cifs:
+      hostname:         "{{ cifs_prov.cluster_ip }}"
+      username:         "{{ cifs_prov.na.username }}"
+      password:         "{{ cifs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:          "{{ cifs_prov.vserver }}"
+      share_name:       "{{ cifs_prov.share_name }}"
+      path:             "{{ cifs_prov.path }}"
+   
+-  name: 'provision cifs RO ACLS'
+   na_ontap_cifs_acl:
+      hostname:         "{{ cifs_prov.cluster_ip }}"
+      username:         "{{ cifs_prov.na.username }}"
+      password:         "{{ cifs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:                "{{ cifs_prov.vserver }}"
+      permission:             "read"
+      share_name:             "{{ cifs_prov.share_name }}"
+      user_or_group:          "{{ loop_rule }}"
+   loop:    "{{ cifs_prov.RO }}"
+   loop_control:
+      loop_var:      loop_rule
+
+-  name: 'provision cifs RW ACLS'
+   na_ontap_cifs_acl:
+      hostname:         "{{ cifs_prov.cluster_ip }}"
+      username:         "{{ cifs_prov.na.username }}"
+      password:         "{{ cifs_prov.na.password }}"
+      https:            true
+      validate_certs:   false
+
+      vserver:                "{{ cifs_prov.vserver }}"
+      permission:             "change"
+      share_name:             "{{ cifs_prov.share_name }}"
+      user_or_group:          "{{ loop_rule }}"
+   loop:    "{{ cifs_prov.RW }}"
+   loop_control:
+      loop_var:      loop_rule
+

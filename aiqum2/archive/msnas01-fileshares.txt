@@ -1,0 +1,973 @@
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [AIQUM Get Storage-Providers fileshares] *******************************************************
+
+TASK [Gathering Facts] ******************************************************************************
+ok: [localhost]
+
+TASK [AIQUM Storage-Providers fileshares] ***********************************************************
+ok: [localhost]
+
+TASK [debug registered vars] ************************************************************************
+ok: [localhost] => {
+    "msg": {
+        "_links": {
+            "self": {
+                "href": "/api/storage-provider/file-shares"
+            }
+        }, 
+        "num_records": 17, 
+        "records": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=563d7f72-5742-11ea-85d8-00a098b4da1c"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c370e961-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 75, 
+                    "key": "c370e961-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Value", 
+                    "peak_iops": 75
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c37204df-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c37204df-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Low"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=563d7f72-5742-11ea-85d8-00a098b4da1c", 
+                "name": "fileShare2", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1073741824
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "563d7f72-5742-11ea-85d8-00a098b4da1c"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=921b43d6-5728-11ea-85d8-00a098b4da1c"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c370e961-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 75, 
+                    "key": "c370e961-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Value", 
+                    "peak_iops": 75
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=921b43d6-5728-11ea-85d8-00a098b4da1c", 
+                "name": "FileShare1", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1073741824
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "921b43d6-5728-11ea-85d8-00a098b4da1c"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=57746710-5400-11ea-8a9b-00a098f7e5da"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                    "name": "cluster2", 
+                    "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=57746710-5400-11ea-8a9b-00a098f7e5da", 
+                "name": "vol_app4_nfs_dest_clone_20022020_114147_67", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 134242304
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290", 
+                    "name": "msnas01sm", 
+                    "uuid": "ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                }, 
+                "uuid": "57746710-5400-11ea-8a9b-00a098f7e5da"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=f2da398f-53f6-11ea-8a9b-00a098f7e5da"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                    "name": "cluster2", 
+                    "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=f2da398f-53f6-11ea-8a9b-00a098f7e5da", 
+                "name": "jga_delete_me_dest", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 134242304
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290", 
+                    "name": "msnas01sm", 
+                    "uuid": "ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                }, 
+                "uuid": "f2da398f-53f6-11ea-8a9b-00a098f7e5da"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=8a298f94-53f3-11ea-8775-00a098b30cb3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=8a298f94-53f3-11ea-8775-00a098b30cb3", 
+                "name": "jga_delete_me", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 135630548992
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "8a298f94-53f3-11ea-8775-00a098b30cb3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=97be8957-526c-11ea-8689-00a098b4731d"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c370e961-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 75, 
+                    "key": "c370e961-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Value", 
+                    "peak_iops": 75
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c37204df-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c37204df-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Low"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=97be8957-526c-11ea-8689-00a098b4731d", 
+                "name": "testtest01", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1073741824
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "97be8957-526c-11ea-8689-00a098b4731d"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=d992d21d-51d0-11ea-8a9b-00a098f7e5da"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                    "name": "cluster2", 
+                    "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=d992d21d-51d0-11ea-8a9b-00a098f7e5da", 
+                "name": "vol_app4_nfs_dest", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 134242304
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290", 
+                    "name": "msnas01sm", 
+                    "uuid": "ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                }, 
+                "uuid": "d992d21d-51d0-11ea-8a9b-00a098f7e5da"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=95c9b8df-51d1-11ea-8a9b-00a098f7e5da"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                    "name": "cluster2", 
+                    "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=95c9b8df-51d1-11ea-8a9b-00a098f7e5da", 
+                "name": "vol_multi01_dest", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 134242304
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=ba8a5d22-51cb-11ea-8fcd-00a098f7e290", 
+                    "name": "msnas01sm", 
+                    "uuid": "ba8a5d22-51cb-11ea-8fcd-00a098f7e290"
+                }, 
+                "uuid": "95c9b8df-51d1-11ea-8a9b-00a098f7e5da"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=3835829a-51c9-11ea-8775-00a098b30cb3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=3835829a-51c9-11ea-8775-00a098b30cb3", 
+                "name": "app4_nfs", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1130258432
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "3835829a-51c9-11ea-8775-00a098b30cb3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=4c1cd514-51c6-11ea-9abd-00a098b372c3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=4c1cd514-51c6-11ea-9abd-00a098b372c3", 
+                "name": "app3_smb", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1130258432
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "4c1cd514-51c6-11ea-9abd-00a098b372c3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=14f7a9cc-4ebd-11ea-9abd-00a098b372c3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c371233a-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 500, 
+                    "key": "c371233a-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Performance", 
+                    "peak_iops": 500
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c3720783-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c3720783-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "High"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=14f7a9cc-4ebd-11ea-9abd-00a098b372c3", 
+                "name": "multi01", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 5368709120
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "14f7a9cc-4ebd-11ea-9abd-00a098b372c3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=60d29faf-4eae-11ea-8775-00a098b30cb3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c371233a-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 500, 
+                    "key": "c371233a-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Performance", 
+                    "peak_iops": 500
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c3720783-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c3720783-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "High"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=60d29faf-4eae-11ea-8775-00a098b30cb3", 
+                "name": "nfstest01", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1073741824
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "60d29faf-4eae-11ea-8775-00a098b30cb3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=6fcb4894-4eac-11ea-9abd-00a098b372c3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c371233a-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 500, 
+                    "key": "c371233a-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Performance", 
+                    "peak_iops": 500
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c3720783-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c3720783-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "High"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=6fcb4894-4eac-11ea-9abd-00a098b372c3", 
+                "name": "smbtest01", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 1073741824
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "6fcb4894-4eac-11ea-9abd-00a098b372c3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=68165cd9-4e88-11ea-9abd-00a098b372c3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=68165cd9-4e88-11ea-9abd-00a098b372c3", 
+                "name": "mix03", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 11302547456
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "68165cd9-4e88-11ea-9abd-00a098b372c3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=d0dad0fc-4e87-11ea-8775-00a098b30cb3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Unassigned", 
+                    "peak_iops": null
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=d0dad0fc-4e87-11ea-8775-00a098b30cb3", 
+                "name": "mix02_data1_1", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 11302547456
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "d0dad0fc-4e87-11ea-8775-00a098b30cb3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=d1d16b97-4e86-11ea-8775-00a098b30cb3"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c371233a-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 500, 
+                    "key": "c371233a-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Performance", 
+                    "peak_iops": 500
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {}, 
+                    "key": null, 
+                    "name": "Unassigned"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                    "name": "cluster1", 
+                    "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=volume,uuid=d1d16b97-4e86-11ea-8775-00a098b30cb3", 
+                "name": "mix01", 
+                "recommended_performance_service_level": {
+                    "_links": {}, 
+                    "expected_iops": null, 
+                    "key": null, 
+                    "name": "Idle", 
+                    "peak_iops": null
+                }, 
+                "space": {
+                    "size": 10737418240
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                        }
+                    }, 
+                    "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                    "name": "msnas01", 
+                    "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+                }, 
+                "uuid": "d1d16b97-4e86-11ea-8775-00a098b30cb3"
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/file-shares/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=d664f9db-49f2-11ea-8a9b-00a098f7e5da"
+                    }
+                }, 
+                "assigned_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c3715f29-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 12935, 
+                    "key": "c3715f29-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Extreme Performance", 
+                    "peak_iops": 12935
+                }, 
+                "assigned_storage_efficiency_policy": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/storage-efficiency-policies/c3720783-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "key": "c3720783-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "High"
+                }, 
+                "cluster": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                    "name": "cluster2", 
+                    "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=volume,uuid=d664f9db-49f2-11ea-8a9b-00a098f7e5da", 
+                "name": "nfs_datastore_01", 
+                "recommended_performance_service_level": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/storage-provider/performance-service-levels/c3715f29-478d-11ea-9b21-d1c772e31eeb"
+                        }
+                    }, 
+                    "expected_iops": 12935, 
+                    "key": "c3715f29-478d-11ea-9b21-d1c772e31eeb", 
+                    "name": "Extreme Performance", 
+                    "peak_iops": 12935
+                }, 
+                "space": {
+                    "size": 2314761322496
+                }, 
+                "svm": {
+                    "_links": {
+                        "self": {
+                            "href": "/api/datacenter/svm/svms/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=f589505d-49ea-11ea-bcf2-00a098f7e5da"
+                        }
+                    }, 
+                    "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=vserver,uuid=f589505d-49ea-11ea-bcf2-00a098f7e5da", 
+                    "name": "vmware_infra", 
+                    "uuid": "f589505d-49ea-11ea-bcf2-00a098f7e5da"
+                }, 
+                "uuid": "d664f9db-49f2-11ea-8a9b-00a098f7e5da"
+            }
+        ], 
+        "total_records": 17
+    }
+}
+
+PLAY RECAP ******************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

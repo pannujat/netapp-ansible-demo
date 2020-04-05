@@ -1,0 +1,64 @@
+# Using /storage-provider/file-shares POST
+
+# Vars
+# Required
+# name
+# size in bytes.
+# performance_service_level.key
+# svm.key
+
+# Optional
+# access_control
+# mountpoint
+# storage_efficiency_policy_key
+
+# JSON Body
+
+{
+  "access_control": {
+    "acl": [
+      {
+        "permission": "Full Control",
+        "user_or_group": "everyone"
+      }
+    "export_policy": {
+      "key": "b06466ed-7c28-11e9-a158-00a0989837e7:type=export_policy,uuid=17179869185",
+      "name_tag": "ExportPolicyNameTag",
+      "rules": [
+        {
+          "clients": [
+            {
+              "match": "0.0.0.0/0"
+            }
+          ],
+          "index": 0,
+          "protocols": [
+            "nfs3"
+          ],
+          "ro_rule": [
+            "any"
+          ],
+          "rw_rule": [
+            "any"
+          ]
+        }
+      ]
+    }
+  },
+  "mountpoint": "/fieshare_mount_point",
+  "name": "FileShare1",
+  "performance_service_level": {
+    "key": "32454e73-06d3-11ea-b7d6-fe163ec4e1a5"
+  },
+  "space": {
+    "size": 1428754
+  },
+  "storage_efficiency_policy": {
+    "key": "32454e63-06d3-11ca-b7d6-fe163ea5e1a5"
+  },
+  "svm": {
+    "key": "a9f4ddea-e395-11e9-b660-005056a71be9:type=vserver,uuid=4e09768c-e406-11e9-b660-005056a71be9"
+  }
+}
+
+

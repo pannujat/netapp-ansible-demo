@@ -1,0 +1,446 @@
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [AIQUM Get NFS Export-Policies] ****************************************************************
+
+TASK [Gathering Facts] ******************************************************************************
+ok: [localhost]
+
+TASK [AIQUM Get NFS Export-Policies] ****************************************************************
+ok: [localhost]
+
+TASK [debug registered vars] ************************************************************************
+ok: [localhost] => {
+    "msg": [
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509442"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509442, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509442", 
+            "name": "NSLM_msnas01_1581615009399", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "10.61.103.0/24"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "nfs3", 
+                        "nfs4"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "none"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509448"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509448, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509448", 
+            "name": "app4_nfs", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "0.0.0.0/0"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509446"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509446, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509446", 
+            "name": "cpoc.local", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "10.61.103.0/24"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "nfs3", 
+                        "nfs4"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "none"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509441"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509441, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509441", 
+            "name": "default", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "0.0.0.0/0"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509449"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509449, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509449", 
+            "name": "jga_delete_me", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "0.0.0.0/0"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509444"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509444, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509444", 
+            "name": "mix02", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "10.61.103.0/24"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509445"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509445, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509445", 
+            "name": "mix03", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "0.0.0.0/0"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/protocols/nfs/export-policies/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509447"
+                }
+            }, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "id": 64424509447, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=export_policy,uuid=64424509447", 
+            "name": "nfs-cpoc-net", 
+            "rules": [
+                {
+                    "anonymous_user": "65534", 
+                    "clients": [
+                        {
+                            "match": "10.61.103.0/24"
+                        }
+                    ], 
+                    "index": 1, 
+                    "protocols": [
+                        "any"
+                    ], 
+                    "ro_rule": [
+                        "any"
+                    ], 
+                    "rw_rule": [
+                        "any"
+                    ], 
+                    "superuser": [
+                        "any"
+                    ]
+                }
+            ], 
+            "svm": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/svm/svms/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=vserver,uuid=8cba8180-4e7e-11ea-b828-00a098acd449", 
+                "name": "msnas01", 
+                "uuid": "8cba8180-4e7e-11ea-b828-00a098acd449"
+            }
+        }
+    ]
+}
+
+PLAY RECAP ******************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

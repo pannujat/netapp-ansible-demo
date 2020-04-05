@@ -1,0 +1,110 @@
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [AIQUM Get Clusters] ***************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************
+ok: [localhost]
+
+TASK [AIQUM Get Clusters] ***************************************************************************
+ok: [localhost]
+
+TASK [debug registered vars] ************************************************************************
+ok: [localhost] => {
+    "msg": {
+        "_links": {
+            "self": {
+                "href": "/api/storage-provider/performance-service-levels"
+            }
+        }, 
+        "num_records": 3, 
+        "records": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/performance-service-levels/c3715f29-478d-11ea-9b21-d1c772e31eeb"
+                    }
+                }, 
+                "create_time": "2020-02-04T15:34:38.000-05:00", 
+                "description": "Provides extremely high throughput at a very low latency.", 
+                "iops": {
+                    "absolute_min_iops": 1000, 
+                    "expected_iops_per_tb": 6144, 
+                    "peak_iops_allocation_policy": "used_space", 
+                    "peak_iops_per_tb": 12288
+                }, 
+                "key": "c3715f29-478d-11ea-9b21-d1c772e31eeb", 
+                "latency": {
+                    "expected": 1.0
+                }, 
+                "name": "Extreme Performance", 
+                "space": {
+                    "available": 36644526034944, 
+                    "used": 51566964736
+                }, 
+                "system_defined": true, 
+                "update_time": "2020-02-04T15:34:38.000-05:00", 
+                "workload_count": 1
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/performance-service-levels/c371233a-478d-11ea-9b21-d1c772e31eeb"
+                    }
+                }, 
+                "create_time": "2020-02-04T15:34:38.000-05:00", 
+                "description": "Provides high throughput at a low latency.", 
+                "iops": {
+                    "absolute_min_iops": 500, 
+                    "expected_iops_per_tb": 2048, 
+                    "peak_iops_allocation_policy": "used_space", 
+                    "peak_iops_per_tb": 4096
+                }, 
+                "key": "c371233a-478d-11ea-9b21-d1c772e31eeb", 
+                "latency": {
+                    "expected": 2.0
+                }, 
+                "name": "Performance", 
+                "space": {
+                    "available": 36644526034944, 
+                    "used": 5050368
+                }, 
+                "system_defined": true, 
+                "update_time": "2020-02-04T15:34:38.000-05:00", 
+                "workload_count": 4
+            }, 
+            {
+                "_links": {
+                    "self": {
+                        "href": "/api/storage-provider/performance-service-levels/c370e961-478d-11ea-9b21-d1c772e31eeb"
+                    }
+                }, 
+                "create_time": "2020-02-04T15:34:38.000-05:00", 
+                "description": "Provides high storage capacity and moderate latency.", 
+                "iops": {
+                    "absolute_min_iops": 75, 
+                    "expected_iops_per_tb": 128, 
+                    "peak_iops_allocation_policy": "used_space", 
+                    "peak_iops_per_tb": 512
+                }, 
+                "key": "c370e961-478d-11ea-9b21-d1c772e31eeb", 
+                "latency": {
+                    "expected": 17.0
+                }, 
+                "name": "Value", 
+                "space": {
+                    "available": 56415134560256, 
+                    "used": 602112
+                }, 
+                "system_defined": true, 
+                "update_time": "2020-02-04T15:34:38.000-05:00", 
+                "workload_count": 1
+            }
+        ], 
+        "total_records": 3
+    }
+}
+
+PLAY RECAP ******************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

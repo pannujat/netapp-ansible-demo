@@ -1,0 +1,8 @@
+cluster: cluster1
+
+netapp_hostname: cluster1
+netapp_username: admin
+# Leave commented out for vars_promtp to work
+#netapp_password:
+
+state: present

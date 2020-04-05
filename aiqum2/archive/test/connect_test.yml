@@ -1,0 +1,14 @@
+# A simple connectivity test
+
+# Example from ansible docs
+- name: Check that you can connect (GET) to a page and it returns a status 200
+  uri:
+    url: http://www.example.com
+
+# modified for NetApp connectivity
+
+# NetApp Active IQ Unified Manager test
+
+
+
+# NetApp ONTAP test

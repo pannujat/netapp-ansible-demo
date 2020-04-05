@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  name: AIQUM Get Clusters
+  vars:
+    input: &login
+      url_username: "{{ aiqum_username }}"
+      url_password: "{{ aiqum_password }}"
+      validate_certs: false
+      force_basic_auth: yes
+  vars_files:
+  - vars/aiqum_vars.yml
+  tasks:
+
+  - name: AIQUM Get Clusters
+    uri:
+      method: GET
+#      url: "{{ aiqum_endpoint_url }}/datacenter/cluster/clusters/"
+      url: "https://10.61.103.71/api/datacenter/cluster/nodes"
+      return_content: yes
+#      body: "{{ lookup('file','vars/cluster.json') }}"
+      headers:
+        Accept: application/json
+#        Content-Type: applicaiton/json
+#      body_format: json
+      <<: *login
+    register: json_response
+
+  - name: debug registered vars
+    debug:
+      msg: "{{ json_response }}"

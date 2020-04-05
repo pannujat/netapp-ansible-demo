@@ -1,0 +1,34 @@
+---
+#
+vserver:                "msnas01"              # Primary SVM
+peer_vserver:           "msnas01sm"            # Secondary SVM
+service_level_name:     "Value"                # Storage Performance Service Level
+vol_name:               "aiqum_test_cifs_03"   # Volume name
+capacity:             1073741824             # volume size in bytes
+
+#
+nas_protocol:           "multi"                # CIFS, NFS, and Multi-protocol
+vol_security_style:     "unix"                 # Volume security-style
+data_protection:        false                  # DR replica: True/False
+aiqum_username:         admin                  # NetApp Adminstrative credentials
+aiqum_password:         cpoc3593               # NetApp Adminstrative credentials
+cluster_ip:             "10.61.103.100"        # ONTAP cluster-mgmt
+peer_cluster_ip:        "10.61.103.110"        # ONTAP cluster-mgmt
+policy_name:            "{{ vol_name }}"       # Setting policy_name to vol_name
+policy_rules:                                  # export-policy rule entries
+   -  client_match:           1.1.1.1
+      protocol:               nfs
+      ro_rule:                any
+      rw_rule:                sys
+      super_user_security:    none
+   -  client_match:           2.2.2.2
+      protocol:               nfs
+      ro_rule:                any
+      rw_rule:                sys
+      super_user_security:    none
+
+# Basic ACL config
+RO:
+-  MSNAS01\Administrator
+RW:
+-  MSNAS01\Administrator

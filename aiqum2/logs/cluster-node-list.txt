@@ -1,0 +1,418 @@
+
+PLAY [AIQUM Get Clusters] ************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************
+ok: [localhost]
+
+TASK [AIQUM Get Clusters] ************************************************************************************************
+ok: [localhost]
+
+TASK [debug registered vars] *********************************************************************************************
+ok: [localhost] => {
+    "msg": [
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=03b165f8-49de-11ea-8a83-00a098f7e5da"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                    }
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                "name": "cluster2", 
+                "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=29d89cc1-49de-11ea-9a70-00a098f7e290"
+                            }
+                        }, 
+                        "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=29d89cc1-49de-11ea-9a70-00a098f7e290", 
+                        "name": "snapmirror-02", 
+                        "uuid": "29d89cc1-49de-11ea-9a70-00a098f7e290"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=03b165f8-49de-11ea-8a83-00a098f7e5da", 
+            "location": "rtp1.1.L26", 
+            "model": "AFF-A320", 
+            "name": "snapmirror-01", 
+            "nvramid": "538020465", 
+            "serial_number": "941852000074", 
+            "systemid": "0538020465", 
+            "uptime": 1110937, 
+            "uuid": "03b165f8-49de-11ea-8a83-00a098f7e5da", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=29d89cc1-49de-11ea-9a70-00a098f7e290"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da"
+                    }
+                }, 
+                "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster,uuid=4294d3ee-49df-11ea-8a83-00a098f7e5da", 
+                "name": "cluster2", 
+                "uuid": "4294d3ee-49df-11ea-8a83-00a098f7e5da"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=03b165f8-49de-11ea-8a83-00a098f7e5da"
+                            }
+                        }, 
+                        "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=03b165f8-49de-11ea-8a83-00a098f7e5da", 
+                        "name": "snapmirror-01", 
+                        "uuid": "03b165f8-49de-11ea-8a83-00a098f7e5da"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "4294d3ee-49df-11ea-8a83-00a098f7e5da:type=cluster_node,uuid=29d89cc1-49de-11ea-9a70-00a098f7e290", 
+            "location": null, 
+            "model": "AFF-A320", 
+            "name": "snapmirror-02", 
+            "nvramid": "538020438", 
+            "serial_number": "941852000069", 
+            "systemid": "0538020438", 
+            "uptime": 1113013, 
+            "uuid": "29d89cc1-49de-11ea-9a70-00a098f7e290", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=86f538fd-46b0-11ea-bcb5-00a098acd449"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=abe954cc-46b0-11ea-9db1-00a098acd41d"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=abe954cc-46b0-11ea-9db1-00a098acd41d", 
+                        "name": "wells-02", 
+                        "uuid": "abe954cc-46b0-11ea-9db1-00a098acd41d"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=86f538fd-46b0-11ea-bcb5-00a098acd449", 
+            "location": "rtp1.1.L27", 
+            "model": "AFF-A700s", 
+            "name": "wells-01", 
+            "nvramid": "537061596", 
+            "serial_number": "941645000185", 
+            "systemid": "0537061596", 
+            "uptime": 1457802, 
+            "uuid": "86f538fd-46b0-11ea-bcb5-00a098acd449", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=abe954cc-46b0-11ea-9db1-00a098acd41d"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=86f538fd-46b0-11ea-bcb5-00a098acd449"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=86f538fd-46b0-11ea-bcb5-00a098acd449", 
+                        "name": "wells-01", 
+                        "uuid": "86f538fd-46b0-11ea-bcb5-00a098acd449"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=abe954cc-46b0-11ea-9db1-00a098acd41d", 
+            "location": null, 
+            "model": "AFF-A700s", 
+            "name": "wells-02", 
+            "nvramid": "537060779", 
+            "serial_number": "941645000186", 
+            "systemid": "0537060779", 
+            "uptime": 1459438, 
+            "uuid": "abe954cc-46b0-11ea-9db1-00a098acd41d", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=1019af3c-46bb-11ea-9516-00a098b372c3"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=fc79caac-46ba-11ea-8b26-00a098b30cb3"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=fc79caac-46ba-11ea-8b26-00a098b30cb3", 
+                        "name": "wells-04", 
+                        "uuid": "fc79caac-46ba-11ea-8b26-00a098b30cb3"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=1019af3c-46bb-11ea-9516-00a098b372c3", 
+            "location": null, 
+            "model": "AFF-A700s", 
+            "name": "wells-03", 
+            "nvramid": "537065556", 
+            "serial_number": "941707000088", 
+            "systemid": "0537065556", 
+            "uptime": 1454089, 
+            "uuid": "1019af3c-46bb-11ea-9516-00a098b372c3", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=fc79caac-46ba-11ea-8b26-00a098b30cb3"
+                }
+            }, 
+            "allFlashOptimized": true, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=1019af3c-46bb-11ea-9516-00a098b372c3"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=1019af3c-46bb-11ea-9516-00a098b372c3", 
+                        "name": "wells-03", 
+                        "uuid": "1019af3c-46bb-11ea-9516-00a098b372c3"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": true, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=fc79caac-46ba-11ea-8b26-00a098b30cb3", 
+            "location": null, 
+            "model": "AFF-A700s", 
+            "name": "wells-04", 
+            "nvramid": "537065661", 
+            "serial_number": "941708000182", 
+            "systemid": "0537065661", 
+            "uptime": 1456006, 
+            "uuid": "fc79caac-46ba-11ea-8b26-00a098b30cb3", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=9dd6a93a-46af-11ea-9f2c-00a098b4731d"
+                }
+            }, 
+            "allFlashOptimized": false, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=aec9d393-46af-11ea-bd50-00a098b4da1c"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=aec9d393-46af-11ea-bd50-00a098b4da1c", 
+                        "name": "wells-06", 
+                        "uuid": "aec9d393-46af-11ea-bd50-00a098b4da1c"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": false, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=9dd6a93a-46af-11ea-9f2c-00a098b4731d", 
+            "location": null, 
+            "model": "FAS8200", 
+            "name": "wells-05", 
+            "nvramid": "537093124", 
+            "serial_number": "721723000090", 
+            "systemid": "0537093124", 
+            "uptime": 1451609, 
+            "uuid": "9dd6a93a-46af-11ea-9f2c-00a098b4731d", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }, 
+        {
+            "_links": {
+                "self": {
+                    "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=aec9d393-46af-11ea-bd50-00a098b4da1c"
+                }
+            }, 
+            "allFlashOptimized": false, 
+            "cluster": {
+                "_links": {
+                    "self": {
+                        "href": "/api/datacenter/cluster/clusters/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449"
+                    }
+                }, 
+                "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster,uuid=52a45ca8-46b2-11ea-bcb5-00a098acd449", 
+                "name": "cluster1", 
+                "uuid": "52a45ca8-46b2-11ea-bcb5-00a098acd449"
+            }, 
+            "ha": {
+                "partners": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/api/datacenter/cluster/nodes/52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=9dd6a93a-46af-11ea-9f2c-00a098b4731d"
+                            }
+                        }, 
+                        "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=9dd6a93a-46af-11ea-9f2c-00a098b4731d", 
+                        "name": "wells-05", 
+                        "uuid": "9dd6a93a-46af-11ea-9f2c-00a098b4731d"
+                    }
+                ]
+            }, 
+            "health": true, 
+            "is_all_flash_optimized": false, 
+            "key": "52a45ca8-46b2-11ea-bcb5-00a098acd449:type=cluster_node,uuid=aec9d393-46af-11ea-bd50-00a098b4da1c", 
+            "location": null, 
+            "model": "FAS8200", 
+            "name": "wells-06", 
+            "nvramid": "537093980", 
+            "serial_number": "721723000089", 
+            "systemid": "0537093980", 
+            "uptime": 1452788, 
+            "uuid": "aec9d393-46af-11ea-bd50-00a098b4da1c", 
+            "vendor": "NetApp", 
+            "version": {
+                "full": "NetApp Release 9.7: Thu Jan 09 17:11:21 UTC 2020", 
+                "generation": 9, 
+                "major": 7, 
+                "minor": 0
+            }
+        }
+    ]
+}
+
+PLAY RECAP ***************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
