@@ -1,0 +1,19 @@
+#Ansible enviornment setup for NetApp modules
+#Version 1.0
+FROM centos:8
+
+MAINTAINER David Blackwell version: 1.0
+
+RUN yum install -y epel-release && \
+    yum install -y python3 git && \
+    pip install --upgrade pip && \
+    pip install ansible && \
+    pip install netapp-lib requests && \
+    pip install solidfire-sdk-python && \
+    ansible-galaxy collection install netapp.ontap -p /usr/share/ansible/collections && \
+    ansible-galaxy collection install netapp.elementsw -p /usr/share/ansible/collections && \
+    yum clean all
+
+RUN mkdir /git &&\
+    cd /git &&\
+        git clone https://github.com/wolftales/netapp-ansible-demo.git /git/.
