@@ -12,6 +12,4 @@ RUN mkdir /git &&\
     git clone https://github.com/wolftales/netapp-ansible-demo.git /git/.
 
 #Set working directory
-#WORKDIR /git/Ansible-Demo
-
-
+#WORKDIR /git/netapp-ansible-demo

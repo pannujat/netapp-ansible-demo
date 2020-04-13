@@ -1,6 +1,6 @@
-#Ansible enviornment setup for NetApp modules
+#Ansible environment setup for NetApp modules
 #Version 1.0
-FROM centos:8
+FROM centos:7
 
 MAINTAINER David Blackwell version: 1.0
 
