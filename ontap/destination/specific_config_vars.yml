@@ -41,7 +41,7 @@ dns_servers: "172.30.16.2"     # Helps remove network dependancy
 
 # NTP Server
 #ntp_srvr: time.nist.gov
-ntp_srvr: pool.ntp.org
+ntp_srvr: us.pool.ntp.org
 
 # Networking Varibles
 #ifgrp_ports: "[e0e, e0f]"
