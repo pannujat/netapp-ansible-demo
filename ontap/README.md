@@ -11,8 +11,8 @@
 
 This demo includes plays for:
 * configuration with both roles and modules
-* * Uses NetApp 'Roles' for cluster and Storage VM configuration
-* SnapMirror replication - using modules
+  * Uses NetApp 'Roles' for cluster and Storage VM configuration
+* SnapMirror replication - using module(s) not roles
 * ansible-vault - password alternative
 
 **Key Elements:**
@@ -22,12 +22,4 @@ This demo includes plays for:
 - Addition standard install best practices
 
 
-Setup Requirements:
-
-ansible-galaxy collection install netapp.ontap (-p /usr/share/ansible/collections)
-
-- Install the NetApp libraries:
---netapp-lib
---solidfire-sdk-python
-
-Note: Any ONTAP 9.3+ based system could be used with some adaptation: SimulateONTAP (vsim), ONTAP Select, etc.
+**Note:** Any ONTAP 9.3+ based system could be used with some adaptation: SimulateONTAP (vsim), ONTAP Select, etc.
