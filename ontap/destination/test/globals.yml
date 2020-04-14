@@ -1,0 +1,23 @@
+cluster: dest95
+netapp_hostname: 172.30.16.215
+netapp_username: admin
+netapp_password: netapp1234
+license_codes: YVUCRRRRYVHXCFABGAAAAAAAAAAA, SOHOURRRYVHXCFABGAAAAAAAAAAA, KQSRRRRRYVHXCFABGAAAAAAAAAAA, MBXNQRRRYVHXCFABGAAAAAAAAAAA, QDDSVRRRYVHXCFABGAAAAAAAAAAA, GUJZTRRRYVHXCFABGAAAAAAAAAAA, UZLKTRRRYVHXCFABGAAAAAAAAAAA, EJFDVRRRYVHXCFABGAAAAAAAAAAA
+disks:
+ - "{{ cluster }}-01"
+#motd: "Only authorized personal may use this system."
+dns:
+ - { dns_domains: lab.local, dns_nameservers: 172.30.16.2 }
+ntp:
+ - { server_name: time.nist.gov, version: auto }
+snmp:
+ - { community_name: public, access_control: ro }
+aggrs:
+ - { name: aggr1, node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+# - { name: aggr2, node: "{{ cluster }}-01", disk_count: 26, max_raid: 26 }
+inters:
+ - { name: intercluster_1, address: 172.30.16.217, netmask: 255.255.0.0, node: "{{ cluster }}-01", port: e0c }
+vservers:
+ - { name: vserver1, aggr: aggr1, protocol: nfs }
+lifs:
+ - { name: vserver1_data_lif, vserver: vserver1, node: "{{ cluster }}-01", port: e0c, protocol: nfs, address: 172.30.16.218, netmask: 255.255.0.0 }

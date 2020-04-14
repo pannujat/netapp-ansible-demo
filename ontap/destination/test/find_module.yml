@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+  - name: Ansible find file example
+    find:
+      paths:/home/ken
+      patterns: "*.txt"
+      register: files_matched
+
+  - debug:
+      msg: "{{ files_matched.files }}"

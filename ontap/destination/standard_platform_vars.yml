@@ -123,7 +123,8 @@ lldp: "run -node * options lldp.enable on"
 
 # Rename root volume section - Ex: cluster_02_vol0 to clusterh01a_root
 vol0_list:
-- { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}", comment: "ansible created volume" }
+- { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}" }
+#- { name: 'vol0', rename: "{{ cluster }}_01_root", vserver: "{{ cluster }}", comment: "ansible created volume" }
 #  - { name: 'vol0', rename: "{{ cluster }}{{ nodename }}01a_root", vserver: "{{ cluster }}" }
 #  - { name: "{{ cluster }}_02_vol0", rename: "{{ cluster }}{{ nodename }}01b_root" }
 #  - { name: "{{ cluster }}_03_vol0", rename: "{{ cluster }}{{ nodename }}02a_root" }
