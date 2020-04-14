@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  collections:
+    - netapp.ontap
+  vars:
+    file: globals.yml
+  vars_files:
+   - "{{ file }}"
+  roles:
+    - na_ontap_cluster_config
+    - na_ontap_vserver_create

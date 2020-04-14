@@ -1,4 +1,4 @@
-cluster: dest97
+cluster: dest95
 
 netapp_hostname: 172.30.16.215
 netapp_username: admin
@@ -7,6 +7,9 @@ netapp_username: admin
 
 state: present
 
+# Set to 120 if runnint ONTAP 9.2 or lower. Defaults to 140
+netapp_version: 140
+ontap_version: 140
 
 # System Specific Varibles
 
@@ -49,8 +52,8 @@ ifgrp_ports: "e0e,e0f"
 vlan_id: 201
 
 # Configuring Intercluster LIFs for SnapMirror, Cloud Tier, etc.
-inters_lif1: 172.30.16.212
-inters_lif1_mask: 255.255.255.0
+inters_lif1: 172.30.16.217
+inters_lif1_mask: 255.255.0.0
 #inters_lif2: 172.30.16.213
 #inters_lif2_mask: 255.255.255.0
 

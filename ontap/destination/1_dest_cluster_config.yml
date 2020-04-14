@@ -49,16 +49,16 @@
 # This can be useful as the first node in the cluster
 # can have a different naming scheme
 
-  - name: rename root volumes
-    na_ontap_volume:
-      state: present
-      from_name: "{{ item.name }}"
-      name: "{{ item.rename }}"
-      percent_snapshot_space: 0
-      vserver: "{{ item.vserver }}"
-      comment: "{{ item.comment }}"
-      <<: *login
-    with_items: "{{ vol0_list }}"
+  #- name: rename root volumes
+  #  na_ontap_volume:
+  #    state: present
+  #    from_name: "{{ item.name }}"
+  #    name: "{{ item.rename }}"
+  #    percent_snapshot_space: 0
+  #    vserver: "{{ item.vserver }}"
+  #    comment: "{{ item.comment }}"
+  #    <<: *login
+  #  with_items: "{{ vol0_list }}"
 
 # Rename root aggregate section - Ex: aggr0_cluster_01 to clusterh01a_aggr0
 
