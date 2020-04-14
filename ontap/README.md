@@ -1,15 +1,13 @@
 # NetApp Ansible Demo
- General NetApp Ansible integration demonstration
+## General NetApp Ansible integration demonstration
 
-# This repo is for sharing a standardizing set of Ansible demo files
-
-ONTAP Demo Requirements:
+**ONTAP Demo Requirements:**
 - 2 x vsims (ONTAP 9.7)
-- - One primary or "source" cluster
-- - One secondary or "destination" cluster
-- - destination system (vsim)
-- - source system (vsim)
-- - install netapp.ontap collection
+-- One primary or "source" cluster
+-- One secondary or "destination" cluster
+-- destination system (vsim)
+-- source system (vsim)
+-- install netapp.ontap collection
 
 This demo includes plays for:
 * configuration with both roles and modules
@@ -17,7 +15,7 @@ This demo includes plays for:
 * SnapMirror replication - using modules
 * ansible-vault - password alternative
 
-Key Elements:
+**Key Elements:**
 - Leverages a prompt for passwords
 - Manages export-policies
 - (re)naming
