@@ -3,10 +3,10 @@
 
 **ONTAP Demo Requirements:**
 - 2 x vsims (ONTAP 9.7)
-  - destination system (vsim)
-  - One primary or "source" cluster
-  - One secondary or "destination" cluster
   - source system (vsim)
+    - Primary or "source" cluster
+  - destination system (vsim)
+    - Secondary or "destination" cluster
 - install netapp.ontap collection
 
 This demo includes plays for:
