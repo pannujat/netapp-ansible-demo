@@ -22,4 +22,4 @@ This demo includes plays for:
 - Addition standard install best practices
 
 
-**Note:** Any ONTAP 9.3+ based system could be used with some adaptation: SimulateONTAP (vsim), ONTAP Select, etc.
+**Note:** Any ONTAP 9.3+ based system could be used with some adaptation: SimulateONTAP (vsim), ONTAP Select, appliance-based platform, etc.
