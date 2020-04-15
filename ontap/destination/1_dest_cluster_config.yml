@@ -20,7 +20,9 @@
       private: yes
   tasks:
 
-# ROLE: na_ontap_config_cluster
+# ROLE: netapp.ontap collections
+#   na_ontap_config_cluster - Day1
+#   na_ontap_vserver_create - Day1
 
   roles:
     - na_ontap_cluster_config
