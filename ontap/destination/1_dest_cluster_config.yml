@@ -22,15 +22,9 @@
 
 # ROLE: na_ontap_config_cluster
 
-  - name: Get Ontapi version
-    na_ontap_info:
-      state: info
-      <<: *login
-      ontapi: 32
-  - import_role:
-      name: na_ontap_cluster_config
-    vars:
-      <<: *login
+  roles:
+    - na_ontap_cluster_config
+    - na_ontap_vserver_create
 
 ###
 # Standard Cluster configuration section
@@ -84,17 +78,7 @@
 # Standard SVM configuration section
 ###
 
-# ROLE: na_ontap_vserver_config
 
-  - name: Get Ontapi version
-    na_ontap_info:
-      state: info
-      <<: *login
-      ontapi: 32
-  - import_role:
-      name: na_ontap_vserver_create
-    vars:
-      <<: *login
 
 # non-ROLE: Update default NFS Server configuration
 
@@ -112,6 +96,7 @@
 #      <<: *login
 
 # Managing Export-policies
+  tasks:
 
   - name: Create SVM Export-policy
     na_ontap_export_policy:
@@ -125,7 +110,7 @@
       state: "{{ state }}"
       policy_name: "{{ item.name }}"
       vserver: "{{ svm }}"
-  #    client_match: 0.0.0.0/0,1.1.1.0/24
+   #    client_match: 0.0.0.0/0,1.1.1.0/24
       client_match: "{{ item.client_match }}"
       ro_rule: "{{ item.ro_rule }}"
       rw_rule: "{{ item.rw_rule }}"

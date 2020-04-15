@@ -1,4 +1,4 @@
-cluster: dest95
+cluster: dest97
 
 netapp_hostname: 172.30.16.215
 netapp_username: admin
